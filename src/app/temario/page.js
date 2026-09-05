@@ -14,8 +14,8 @@ export default function TemarioPage() {
           Temario
         </h1>
         <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-300">
-          Contenido temático del curso de Robótica Industrial, organizado en
-          13 temas.
+          Los 12 temas del curso de Robótica Industrial, según el sílabo del
+          período 2627-1.
         </p>
         <div className="mt-10">
           <TemarioList />
