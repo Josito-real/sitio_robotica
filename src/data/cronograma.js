@@ -31,271 +31,103 @@ function formatFecha(iso) {
   return `${dia.charAt(0).toUpperCase()}${dia.slice(1)} ${date.getUTCDate()} de ${mes}`;
 }
 
-// Contenido de las 24 clases, común a ambas secciones — solo cambian las
-// fechas según los días de la semana en que se dicte cada sección.
-const CONTENIDO_SEMANAS = [
-  {
-    semana: 1,
-    clase1: {
-      numero: 1,
-      tipo: "clase",
-      contenido:
-        "Tema 1: Introducción a la robótica. Antecedentes, definición de robot, articulación, eslabón y grados de libertad (GDL).",
-    },
-    clase2: {
-      numero: 2,
-      tipo: "clase",
-      contenido:
-        "Tema 1 (cont.): Aplicaciones industriales. Tema 2: Morfología del robot — clasificación y configuraciones.",
-    },
-    hitos: [
-      "Publicación de directrices de la Fase 1 del proyecto final en Aulas Virtuales.",
-    ],
-  },
-  {
-    semana: 2,
-    clase1: {
-      numero: 3,
-      tipo: "clase",
-      contenido:
-        "Tema 3 y 4: Estructura mecánica del manipulador. Configuraciones clásicas (Cartesiano, SCARA, Antropomórfico). Análisis de GDL.",
-    },
-    clase2: {
-      numero: 4,
-      tipo: "clase",
-      contenido:
-        "Tema 5: Señales de entrada y salida. Microcontroladores: Arduino, ESP-32 y Raspberry Pi. Aplicaciones y programación.",
-    },
-    hitos: [],
-  },
-  {
-    semana: 3,
-    clase1: {
-      numero: 5,
-      tipo: "clase",
-      contenido:
-        "Tema 6: Sensores de Posición (Potenciómetro, Encoder) y Proximidad (Óptico, Inductivo, Ultrasónico, Infrarrojo).",
-    },
-    clase2: {
-      numero: 6,
-      tipo: "clase",
-      contenido:
-        "Tema 6 (cont.): Sensores de Velocidad, Aceleración, Presión y Temperatura. Acondicionamiento de señal.",
-    },
-    hitos: [],
-  },
-  {
-    semana: 4,
-    clase1: {
-      numero: 7,
-      tipo: "clase",
-      contenido:
-        "Tema 7: Actuadores — Solenoides, Motores DC (control PWM y Puentes H), Motores Paso a Paso y Servomotores.",
-    },
-    clase2: {
-      numero: 8,
-      tipo: "lab",
-      contenido: "LAB 1 — Programación de microcontroladores (Arduino).",
-    },
-    hitos: [
-      "Fecha límite de la Fase 1 del proyecto final: anteproyecto y boceto del diseño.",
-    ],
-  },
-  {
-    semana: 5,
-    clase1: {
-      numero: 9,
-      tipo: "lab",
-      contenido:
-        "LAB 2 — Adquisición de datos con sensores y microcontroladores (Arduino).",
-    },
-    clase2: {
-      numero: 10,
-      tipo: "lab",
-      contenido: "LAB 3 — Control de actuadores (Arduino).",
-    },
-    hitos: [
-      "Publicación de directrices de la Fase 2 del proyecto final en Aulas Virtuales.",
-    ],
-  },
-  {
-    semana: 6,
-    clase1: {
-      numero: 11,
-      tipo: "examen",
-      contenido: "Primer examen — Temas 1 al 7.",
-    },
-    clase2: {
-      numero: 12,
-      tipo: "clase",
-      contenido:
-        "Tema 8: Cinemática Directa — Matemáticas para robótica, matrices de transformación homogénea, notación Denavit-Hartenberg (DH).",
-    },
-    hitos: [],
-  },
-  {
-    semana: 7,
-    clase1: {
-      numero: 13,
-      tipo: "clase",
-      contenido:
-        "Tema 8 (cont.): Cinemática Inversa — métodos analíticos y numéricos. Espacio de trabajo y restricciones.",
-    },
-    clase2: {
-      numero: 14,
-      tipo: "clase",
-      contenido:
-        "Tema 9: Generación de trayectorias (PTP, Lineal, Circular). Detección de colisiones y puntos de paso de seguridad.",
-    },
-    hitos: [],
-  },
-  {
-    semana: 8,
-    clase1: {
-      numero: 15,
-      tipo: "clase",
-      contenido:
-        "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Introducción a ROS 2: nodos, tópicos y mensajes.",
-    },
-    clase2: {
-      numero: 16,
-      tipo: "clase",
-      contenido:
-        "Tema 11: Visión Artificial — Procesamiento de imágenes con OpenCV, detección de colores, bordes y reconocimiento de patrones.",
-    },
-    hitos: [
-      "Fecha límite de la Fase 2 del proyecto final: estructura física y software.",
-    ],
-  },
-  {
-    semana: 9,
-    clase1: {
-      numero: 17,
-      tipo: "clase",
-      contenido:
-        "Tema 12: Redes neuronales y planificación de movimientos (Path Planning) aplicados a robótica.",
-    },
-    clase2: {
-      numero: 18,
-      tipo: "lab",
-      contenido: "LAB 4 — Dobot Magician: pick and place, trayectorias y programación.",
-    },
-    hitos: [
-      "Publicación de directrices de la Fase 3 del proyecto final en Aulas Virtuales.",
-    ],
-  },
-  {
-    semana: 10,
-    clase1: {
-      numero: 19,
-      tipo: "lab",
-      contenido:
-        "LAB 5 — PiCar-X Sesión 1: conexión, configuración y movimiento básico.",
-    },
-    clase2: {
-      numero: 20,
-      tipo: "lab",
-      contenido:
-        "LAB 6 — PiCar-X Sesión 2: sensores, evasión de obstáculos y seguimiento de línea.",
-    },
-    hitos: [],
-  },
-  {
-    semana: 11,
-    clase1: {
-      numero: 21,
-      tipo: "lab",
-      contenido:
-        "LAB 7 — Bioloid: programación de rutinas de movimiento y comportamiento.",
-    },
-    clase2: {
-      numero: 22,
-      tipo: "clase",
-      contenido:
-        "Simulación en CoppeliaSim — Fundamentos, importación de modelos y programación de escenas robóticas.",
-    },
-    hitos: [
-      "Inicio de la ventana de defensas de la Fase 3 (semanas 11–12, horario a coordinar con el profesor).",
-    ],
-  },
-  {
-    semana: 12,
-    clase1: {
-      numero: 23,
-      tipo: "examen",
-      contenido: "Segundo examen — Temas 8 al 12.",
-    },
-    clase2: {
-      numero: 24,
-      tipo: "revision",
-      contenido: "Revisión de notas finales.",
-    },
-    hitos: ["Cierre de la ventana de defensas de la Fase 3 del proyecto final."],
-  },
+export const periodo = {
+  nombre: "Trimestre septiembre – diciembre 2026 · Período 2627-1",
+  inicio: "Lunes 14 de septiembre de 2026",
+  cierre: "Viernes 4 de diciembre de 2026",
+  duracion: "12 semanas",
+};
+
+// Contenido tomado del sílabo FPTEN27 (período 2627-1), sección 10.
+// La Sección 1 pierde la clase del lunes 12 de octubre por feriado nacional
+// y dicta 23 clases: el contenido de las Semanas 1 a 3 va comprimido. Desde
+// la Semana 6 ambas secciones avanzan al mismo ritmo.
+const CLASES_SECCION_1 = [
+  { semana: 1, fecha: "2026-09-14", tipo: "teoria", contenido: "Tema 1: Introducción a la robótica. Antecedentes, definición de robot, articulación, eslabón, grados de libertad y aplicaciones industriales." },
+  { semana: 1, fecha: "2026-09-16", tipo: "teoria", contenido: "Tema 2: Morfología del robot. Temas 3 y 4: Estructura mecánica del manipulador, configuraciones clásicas (cartesiano, SCARA, antropomórfico) y análisis de GDL." },
+  { semana: 2, fecha: "2026-09-21", tipo: "teoria", contenido: "Tema 5: Señales de entrada y salida. Microcontroladores: Arduino, ESP32 y Raspberry Pi." },
+  { semana: 2, fecha: "2026-09-23", tipo: "teoria", contenido: "Tema 6: Sensores de posición (potenciómetro, encoder) y de proximidad (óptico, inductivo, ultrasónico, infrarrojo)." },
+  { semana: 3, fecha: "2026-09-28", tipo: "teoria", contenido: "Tema 6 (cont.): Sensores de velocidad, aceleración, presión y temperatura. Acondicionamiento de señal." },
+  { semana: 3, fecha: "2026-09-30", tipo: "teoria", contenido: "Tema 7: Actuadores. Solenoides, motores DC (control PWM y puentes H), motores paso a paso y servomotores." },
+  { semana: 4, fecha: "2026-10-05", tipo: "laboratorio", contenido: "Práctica 1: Programación de microcontroladores (Arduino)." },
+  { semana: 4, fecha: "2026-10-07", tipo: "laboratorio", contenido: "Práctica 2: Adquisición de datos con sensores (Arduino)." },
+  { semana: 5, fecha: "2026-10-12", tipo: "feriado", contenido: "Feriado nacional — no hay clase." },
+  { semana: 5, fecha: "2026-10-14", tipo: "laboratorio", contenido: "Práctica 3: Control de actuadores (Arduino)." },
+  { semana: 6, fecha: "2026-10-19", tipo: "parcial", contenido: "Primer parcial — Temas 1 al 7." },
+  { semana: 6, fecha: "2026-10-21", tipo: "teoria", contenido: "Tema 8: Cinemática directa. Matrices de transformación homogénea y notación Denavit-Hartenberg.", marcador: "Publicación de directrices del Proyecto Final" },
+  { semana: 7, fecha: "2026-10-26", tipo: "teoria", contenido: "Tema 8 (cont.): Cinemática inversa, métodos analíticos y numéricos. Matriz Jacobiana. Espacio de trabajo y restricciones." },
+  { semana: 7, fecha: "2026-10-28", tipo: "teoria", contenido: "Clase de MATLAB: resolución computacional de cinemática con guía práctica.", marcador: "Asignación de la Tarea 1" },
+  { semana: 8, fecha: "2026-11-02", tipo: "teoria", contenido: "Tema 9: Generación de trayectorias (PTP, lineal, circular). Detección de colisiones y puntos de paso de seguridad.", marcador: "Entrega de la Tarea 1" },
+  { semana: 8, fecha: "2026-11-04", tipo: "teoria", contenido: "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Arquitectura ROS 2: nodos, tópicos y paradigma publicador/suscriptor. Demostración en MATLAB.", marcador: "Asignación de la Tarea 2" },
+  { semana: 9, fecha: "2026-11-09", tipo: "teoria", contenido: "Tema 11: Visión artificial. Procesamiento de imágenes con OpenCV, detección de colores, bordes y reconocimiento de patrones." },
+  { semana: 9, fecha: "2026-11-11", tipo: "teoria", contenido: "Tema 12: Redes neuronales y planificación de movimientos (Dijkstra, A*, RRT, RRT*, campos potenciales) aplicados a robótica." },
+  { semana: 10, fecha: "2026-11-16", tipo: "laboratorio", contenido: "Práctica 4: Simulación y control remoto de escenas robóticas (CoppeliaSim + Python)." },
+  { semana: 10, fecha: "2026-11-18", tipo: "laboratorio", contenido: "Práctica 5: Pick and place y trayectorias (Dobot Magician).", marcador: "Entrega de la Tarea 2" },
+  { semana: 11, fecha: "2026-11-23", tipo: "laboratorio", contenido: "Práctica 6: Percepción y navegación en robot móvil (PiCar-X).", marcador: "Coordinación de horarios de defensa" },
+  { semana: 11, fecha: "2026-11-25", tipo: "parcial", contenido: "Segundo parcial — Temas 8 al 12." },
+  { semana: 12, fecha: "2026-11-30", tipo: "defensa", contenido: "Defensas del Proyecto Final." },
+  { semana: 12, fecha: "2026-12-02", tipo: "defensa", contenido: "Defensas del Proyecto Final. Revisión de notas finales." },
 ];
 
-// Fechas [claseImpar, clasePar] de cada semana, confirmadas contra el
-// calendario real (día de la semana verificado, no calculado a mano).
-const FECHAS_MARTES_JUEVES = [
-  ["2026-09-15", "2026-09-17"],
-  ["2026-09-22", "2026-09-24"],
-  ["2026-09-29", "2026-10-01"],
-  ["2026-10-06", "2026-10-08"],
-  ["2026-10-13", "2026-10-15"],
-  ["2026-10-20", "2026-10-22"],
-  ["2026-10-27", "2026-10-29"],
-  ["2026-11-03", "2026-11-05"],
-  ["2026-11-10", "2026-11-12"],
-  ["2026-11-17", "2026-11-19"],
-  ["2026-11-24", "2026-11-26"],
-  ["2026-12-01", "2026-12-03"],
-];
-
-// El lunes 12 de octubre de 2026 es feriado (Día de la Resistencia
-// Indígena) — esa clase se omite y el resto de las fechas de esta sección
-// se recorre en consecuencia para conservar las 24 clases. Por eso, a
-// partir de la Semana 5, el orden dentro de la semana pasa a ser
-// miércoles-antes-que-lunes.
-const FECHAS_LUNES_MIERCOLES = [
-  ["2026-09-14", "2026-09-16"],
-  ["2026-09-21", "2026-09-23"],
-  ["2026-09-28", "2026-09-30"],
-  ["2026-10-05", "2026-10-07"],
-  ["2026-10-14", "2026-10-19"],
-  ["2026-10-21", "2026-10-26"],
-  ["2026-10-28", "2026-11-02"],
-  ["2026-11-04", "2026-11-09"],
-  ["2026-11-11", "2026-11-16"],
-  ["2026-11-18", "2026-11-23"],
-  ["2026-11-25", "2026-11-30"],
-  ["2026-12-02", "2026-12-07"],
+const CLASES_SECCION_2 = [
+  { semana: 1, fecha: "2026-09-15", tipo: "teoria", contenido: "Tema 1: Introducción a la robótica. Antecedentes, definición de robot, articulación, eslabón, grados de libertad y aplicaciones industriales." },
+  { semana: 1, fecha: "2026-09-17", tipo: "teoria", contenido: "Tema 2: Morfología del robot, clasificación y configuraciones. Tema 3: Estructura mecánica del manipulador." },
+  { semana: 2, fecha: "2026-09-22", tipo: "teoria", contenido: "Tema 4: Configuraciones clásicas (cartesiano, SCARA, antropomórfico) y análisis de grados de libertad." },
+  { semana: 2, fecha: "2026-09-24", tipo: "teoria", contenido: "Tema 5: Señales de entrada y salida. Microcontroladores: Arduino, ESP32 y Raspberry Pi." },
+  { semana: 3, fecha: "2026-09-29", tipo: "teoria", contenido: "Tema 6: Sensores de posición (potenciómetro, encoder) y de proximidad (óptico, inductivo, ultrasónico, infrarrojo)." },
+  { semana: 3, fecha: "2026-10-01", tipo: "teoria", contenido: "Tema 6 (cont.): Sensores de velocidad, aceleración, presión y temperatura. Acondicionamiento de señal." },
+  { semana: 4, fecha: "2026-10-06", tipo: "teoria", contenido: "Tema 7: Actuadores. Solenoides, motores DC (control PWM y puentes H), motores paso a paso y servomotores." },
+  { semana: 4, fecha: "2026-10-08", tipo: "laboratorio", contenido: "Práctica 1: Programación de microcontroladores (Arduino)." },
+  { semana: 5, fecha: "2026-10-13", tipo: "laboratorio", contenido: "Práctica 2: Adquisición de datos con sensores (Arduino)." },
+  { semana: 5, fecha: "2026-10-15", tipo: "laboratorio", contenido: "Práctica 3: Control de actuadores (Arduino)." },
+  { semana: 6, fecha: "2026-10-20", tipo: "parcial", contenido: "Primer parcial — Temas 1 al 7." },
+  { semana: 6, fecha: "2026-10-22", tipo: "teoria", contenido: "Tema 8: Cinemática directa. Matrices de transformación homogénea y notación Denavit-Hartenberg.", marcador: "Publicación de directrices del Proyecto Final" },
+  { semana: 7, fecha: "2026-10-27", tipo: "teoria", contenido: "Tema 8 (cont.): Cinemática inversa, métodos analíticos y numéricos. Matriz Jacobiana. Espacio de trabajo y restricciones." },
+  { semana: 7, fecha: "2026-10-29", tipo: "teoria", contenido: "Clase de MATLAB: resolución computacional de cinemática con guía práctica.", marcador: "Asignación de la Tarea 1" },
+  { semana: 8, fecha: "2026-11-03", tipo: "teoria", contenido: "Tema 9: Generación de trayectorias (PTP, lineal, circular). Detección de colisiones y puntos de paso de seguridad.", marcador: "Entrega de la Tarea 1" },
+  { semana: 8, fecha: "2026-11-05", tipo: "teoria", contenido: "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Arquitectura ROS 2: nodos, tópicos y paradigma publicador/suscriptor. Demostración en MATLAB.", marcador: "Asignación de la Tarea 2" },
+  { semana: 9, fecha: "2026-11-10", tipo: "teoria", contenido: "Tema 11: Visión artificial. Procesamiento de imágenes con OpenCV, detección de colores, bordes y reconocimiento de patrones." },
+  { semana: 9, fecha: "2026-11-12", tipo: "teoria", contenido: "Tema 12: Redes neuronales y planificación de movimientos (Dijkstra, A*, RRT, RRT*, campos potenciales) aplicados a robótica." },
+  { semana: 10, fecha: "2026-11-17", tipo: "laboratorio", contenido: "Práctica 4: Simulación y control remoto de escenas robóticas (CoppeliaSim + Python)." },
+  { semana: 10, fecha: "2026-11-19", tipo: "laboratorio", contenido: "Práctica 5: Pick and place y trayectorias (Dobot Magician).", marcador: "Entrega de la Tarea 2" },
+  { semana: 11, fecha: "2026-11-24", tipo: "laboratorio", contenido: "Práctica 6: Percepción y navegación en robot móvil (PiCar-X).", marcador: "Coordinación de horarios de defensa" },
+  { semana: 11, fecha: "2026-11-26", tipo: "parcial", contenido: "Segundo parcial — Temas 8 al 12." },
+  { semana: 12, fecha: "2026-12-01", tipo: "defensa", contenido: "Defensas del Proyecto Final." },
+  { semana: 12, fecha: "2026-12-03", tipo: "defensa", contenido: "Defensas del Proyecto Final. Revisión de notas finales." },
 ];
 
 export const secciones = [
   {
-    id: "martes-jueves",
-    nombre: "Martes y Jueves",
-    dias: "Martes y jueves",
-    fechas: FECHAS_MARTES_JUEVES,
+    id: "seccion-1",
+    nombre: "Sección 1",
+    dias: "Lunes y miércoles",
+    horario: "7:00 – 8:30 a.m.",
+    totalClases: 23,
+    clases: CLASES_SECCION_1,
+    nota: "El lunes 12 de octubre de 2026 es feriado nacional, así que esta sección dicta 23 clases en lugar de 24. El contenido de las Semanas 1 a 3 va comprimido para compensarlo: desde la Semana 6 ambas secciones avanzan al mismo ritmo, con las mismas evaluaciones y las mismas fechas de entrega.",
   },
   {
-    id: "lunes-miercoles",
-    nombre: "Lunes y Miércoles",
-    dias: "Lunes y miércoles",
-    fechas: FECHAS_LUNES_MIERCOLES,
-    nota: "El lunes 12 de octubre de 2026 es feriado (Día de la Resistencia Indígena), así que esa clase no se dicta. A partir de la Semana 5, el resto de las fechas se recorre para conservar las 24 clases del curso.",
+    id: "seccion-2",
+    nombre: "Sección 2",
+    dias: "Martes y jueves",
+    horario: "7:00 – 8:30 a.m.",
+    totalClases: 24,
+    clases: CLASES_SECCION_2,
   },
 ];
 
-export function getCronograma(seccionId) {
+export function getSemanas(seccionId) {
   const seccion = secciones.find((s) => s.id === seccionId) ?? secciones[0];
+  const semanas = [];
 
-  return CONTENIDO_SEMANAS.map((semana, index) => {
-    const [fecha1, fecha2] = seccion.fechas[index];
-    return {
-      ...semana,
-      clase1: { ...semana.clase1, fecha: formatFecha(fecha1) },
-      clase2: { ...semana.clase2, fecha: formatFecha(fecha2) },
-    };
-  });
+  for (const clase of seccion.clases) {
+    let semana = semanas.find((s) => s.numero === clase.semana);
+    if (!semana) {
+      semana = { numero: clase.semana, clases: [] };
+      semanas.push(semana);
+    }
+    semana.clases.push({ ...clase, fechaLabel: formatFecha(clase.fecha) });
+  }
+
+  return semanas;
 }
