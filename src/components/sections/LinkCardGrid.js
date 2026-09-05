@@ -1,7 +1,8 @@
+import Link from "next/link";
 import Container from "@/components/layout/Container";
 import NavCard from "@/components/sections/NavCard";
 
-export default function LinkCardGrid({ title, items }) {
+export default function LinkCardGrid({ title, items, verMas }) {
   return (
     <section className="py-12">
       <Container>
@@ -11,6 +12,14 @@ export default function LinkCardGrid({ title, items }) {
             <NavCard key={item.id} {...item} />
           ))}
         </div>
+        {verMas && (
+          <Link
+            href={verMas.href}
+            className="mt-6 inline-block text-sm font-medium underline underline-offset-4"
+          >
+            {verMas.label}
+          </Link>
+        )}
       </Container>
     </section>
   );

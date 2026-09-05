@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes girar-horario {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes girar-antihorario {
+  to {
+    transform: rotate(-360deg);
+  }
+}

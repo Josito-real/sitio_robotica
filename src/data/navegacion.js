@@ -1,3 +1,5 @@
+import { interactivos } from "@/data/interactivos";
+
 export const enlacesDelCurso = [
   {
     id: "temario",
@@ -25,17 +27,13 @@ export const enlacesDelCurso = [
   },
 ];
 
-export const enlacesMaterialInteractivo = [
-  {
-    id: "material-proximamente-1",
-    label: "Próximamente",
-    description: "Material interactivo del curso, aún por definir.",
-    href: "#",
-  },
-  {
-    id: "material-proximamente-2",
-    label: "Próximamente",
-    description: "Más recursos interactivos se agregarán aquí.",
-    href: "#",
-  },
-];
+// Se derivan del catálogo para que el home y /interactivos no se
+// desincronicen cuando se publique un simulador nuevo.
+export const enlacesMaterialInteractivo = interactivos
+  .filter((item) => item.estado === "disponible")
+  .map((item) => ({
+    id: item.id,
+    label: item.titulo,
+    description: item.resumen,
+    href: item.href,
+  }));
