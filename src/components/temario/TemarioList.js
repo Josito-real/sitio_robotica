@@ -14,6 +14,13 @@ export default function TemarioList() {
             </span>
             {tema.titulo}
           </h2>
+          {tema.subtemas && (
+            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+              {tema.subtemas.map((subtema) => (
+                <li key={subtema}>{subtema}</li>
+              ))}
+            </ul>
+          )}
           {tema.descripcion && (
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
               {tema.descripcion}

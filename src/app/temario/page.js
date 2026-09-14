@@ -15,7 +15,8 @@ export default function TemarioPage() {
         </h1>
         <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-300">
           Los 12 temas del curso de Robótica Industrial, según el sílabo del
-          período 2627-1.
+          período 2627-1. El primer parcial evalúa los temas 1 al 7 y el
+          segundo, los temas 8 al 12.
         </p>
         <div className="mt-10">
           <TemarioList />
