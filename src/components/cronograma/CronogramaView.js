@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { secciones, getSemanas } from "@/data/cronograma";
+import { periodo, secciones, getSemanas } from "@/data/cronograma";
 import WeekRow from "@/components/cronograma/WeekRow";
 import ClaseTipoBadge, {
   TIPOS_LEYENDA,
@@ -38,7 +38,8 @@ export default function CronogramaView() {
       </div>
 
       <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-300">
-        {seccion.dias}, {seccion.horario} · {seccion.totalClases} clases
+        {seccion.dias}, {seccion.horario} · {periodo.lugar} ·{" "}
+        {seccion.totalClases} clases
       </p>
 
       {seccion.nota && (

@@ -78,7 +78,7 @@ export const parciales = [
     momento: "Semana 6, primera clase",
     contenido: "Temas 1 al 7",
     detalle:
-      "Evaluación teórica sobre los fundamentos: introducción a la robótica, morfología, estructura mecánica, señales de entrada y salida, microcontroladores, sensores y actuadores.",
+      "Evaluación teórica sobre los fundamentos: definición y morfología de robots, ejes de coordenadas, estructura mecánica, señales de entrada y salida, microprocesadores y microcontroladores, sensores y actuadores.",
     fechas: [
       { seccion: "Sección 1 — lunes y miércoles", fecha: "Lunes 19 de octubre" },
       { seccion: "Sección 2 — martes y jueves", fecha: "Martes 20 de octubre" },

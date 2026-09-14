@@ -11,7 +11,7 @@ export default function Pagina() {
   return (
     <PaginaSimulador
       titulo="Transmisión de potencia"
-      tema="Tema 7"
+      tema="Tema 3"
       resumen="Un par de engranajes en marcha: cómo la relación de transmisión intercambia velocidad por torque, y por qué la potencia de salida nunca supera a la de entrada."
     >
       <SimuladorTransmision />

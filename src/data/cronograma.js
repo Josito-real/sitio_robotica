@@ -36,19 +36,21 @@ export const periodo = {
   inicio: "Lunes 14 de septiembre de 2026",
   cierre: "Viernes 4 de diciembre de 2026",
   duracion: "12 semanas",
+  lugar: "Laboratorio de Autómatas",
 };
 
-// Contenido tomado del sílabo FPTEN27 (período 2627-1), sección 10.
+// Contenido según el brief del período 2627-1 (sílabo FPTEN27): semanas 1–5 y
+// prácticas 4–6 actualizadas; el resto se mantiene del sílabo.
 // La Sección 1 pierde la clase del lunes 12 de octubre por feriado nacional
 // y dicta 23 clases: el contenido de las Semanas 1 a 3 va comprimido. Desde
 // la Semana 6 ambas secciones avanzan al mismo ritmo.
 const CLASES_SECCION_1 = [
-  { semana: 1, fecha: "2026-09-14", tipo: "teoria", contenido: "Tema 1: Introducción a la robótica. Antecedentes, definición de robot, articulación, eslabón, grados de libertad y aplicaciones industriales." },
-  { semana: 1, fecha: "2026-09-16", tipo: "teoria", contenido: "Tema 2: Morfología del robot. Temas 3 y 4: Estructura mecánica del manipulador, configuraciones clásicas (cartesiano, SCARA, antropomórfico) y análisis de GDL." },
-  { semana: 2, fecha: "2026-09-21", tipo: "teoria", contenido: "Tema 5: Señales de entrada y salida. Microcontroladores: Arduino, ESP32 y Raspberry Pi." },
-  { semana: 2, fecha: "2026-09-23", tipo: "teoria", contenido: "Tema 6: Sensores de posición (potenciómetro, encoder) y de proximidad (óptico, inductivo, ultrasónico, infrarrojo)." },
-  { semana: 3, fecha: "2026-09-28", tipo: "teoria", contenido: "Tema 6 (cont.): Sensores de velocidad, aceleración, presión y temperatura. Acondicionamiento de señal." },
-  { semana: 3, fecha: "2026-09-30", tipo: "teoria", contenido: "Tema 7: Actuadores. Solenoides, motores DC (control PWM y puentes H), motores paso a paso y servomotores." },
+  { semana: 1, fecha: "2026-09-14", tipo: "teoria", contenido: "Tema 1: Definición y morfología de robots." },
+  { semana: 1, fecha: "2026-09-16", tipo: "teoria", contenido: "Tema 2: Ejes de coordenadas y configuraciones. Tema 3: Estructura mecánica." },
+  { semana: 2, fecha: "2026-09-21", tipo: "teoria", contenido: "Tema 4: Señales de entrada y salida." },
+  { semana: 2, fecha: "2026-09-23", tipo: "teoria", contenido: "Tema 5: Microprocesador vs. microcontrolador." },
+  { semana: 3, fecha: "2026-09-28", tipo: "teoria", contenido: "Tema 6: Sensores." },
+  { semana: 3, fecha: "2026-09-30", tipo: "teoria", contenido: "Tema 7: Actuadores." },
   { semana: 4, fecha: "2026-10-05", tipo: "laboratorio", contenido: "Práctica 1: Programación de microcontroladores (Arduino)." },
   { semana: 4, fecha: "2026-10-07", tipo: "laboratorio", contenido: "Práctica 2: Adquisición de datos con sensores (Arduino)." },
   { semana: 5, fecha: "2026-10-12", tipo: "feriado", contenido: "Feriado nacional — no hay clase." },
@@ -61,22 +63,22 @@ const CLASES_SECCION_1 = [
   { semana: 8, fecha: "2026-11-04", tipo: "teoria", contenido: "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Arquitectura ROS 2: nodos, tópicos y paradigma publicador/suscriptor. Demostración en MATLAB.", marcador: "Asignación de la Tarea 2" },
   { semana: 9, fecha: "2026-11-09", tipo: "teoria", contenido: "Tema 11: Visión artificial. Procesamiento de imágenes con OpenCV, detección de colores, bordes y reconocimiento de patrones." },
   { semana: 9, fecha: "2026-11-11", tipo: "teoria", contenido: "Tema 12: Redes neuronales y planificación de movimientos (Dijkstra, A*, RRT, RRT*, campos potenciales) aplicados a robótica." },
-  { semana: 10, fecha: "2026-11-16", tipo: "laboratorio", contenido: "Práctica 4: Simulación y control remoto de escenas robóticas (CoppeliaSim + Python)." },
-  { semana: 10, fecha: "2026-11-18", tipo: "laboratorio", contenido: "Práctica 5: Pick and place y trayectorias (Dobot Magician).", marcador: "Entrega de la Tarea 2" },
-  { semana: 11, fecha: "2026-11-23", tipo: "laboratorio", contenido: "Práctica 6: Percepción y navegación en robot móvil (PiCar-X).", marcador: "Coordinación de horarios de defensa" },
+  { semana: 10, fecha: "2026-11-16", tipo: "laboratorio", contenido: "Práctica 4: Programación por bloques de robot móvil (PiCar-X con Blockly)." },
+  { semana: 10, fecha: "2026-11-18", tipo: "laboratorio", contenido: "Práctica 5: Programación en Python desde la Raspberry Pi (PiCar-X).", marcador: "Entrega de la Tarea 2" },
+  { semana: 11, fecha: "2026-11-23", tipo: "laboratorio", contenido: "Práctica 6: Pick and place y generación de trayectorias (Dobot Magician).", marcador: "Coordinación de horarios de defensa" },
   { semana: 11, fecha: "2026-11-25", tipo: "parcial", contenido: "Segundo parcial — Temas 8 al 12." },
   { semana: 12, fecha: "2026-11-30", tipo: "defensa", contenido: "Defensas del Proyecto Final." },
   { semana: 12, fecha: "2026-12-02", tipo: "defensa", contenido: "Defensas del Proyecto Final. Revisión de notas finales." },
 ];
 
 const CLASES_SECCION_2 = [
-  { semana: 1, fecha: "2026-09-15", tipo: "teoria", contenido: "Tema 1: Introducción a la robótica. Antecedentes, definición de robot, articulación, eslabón, grados de libertad y aplicaciones industriales." },
-  { semana: 1, fecha: "2026-09-17", tipo: "teoria", contenido: "Tema 2: Morfología del robot, clasificación y configuraciones. Tema 3: Estructura mecánica del manipulador." },
-  { semana: 2, fecha: "2026-09-22", tipo: "teoria", contenido: "Tema 4: Configuraciones clásicas (cartesiano, SCARA, antropomórfico) y análisis de grados de libertad." },
-  { semana: 2, fecha: "2026-09-24", tipo: "teoria", contenido: "Tema 5: Señales de entrada y salida. Microcontroladores: Arduino, ESP32 y Raspberry Pi." },
-  { semana: 3, fecha: "2026-09-29", tipo: "teoria", contenido: "Tema 6: Sensores de posición (potenciómetro, encoder) y de proximidad (óptico, inductivo, ultrasónico, infrarrojo)." },
-  { semana: 3, fecha: "2026-10-01", tipo: "teoria", contenido: "Tema 6 (cont.): Sensores de velocidad, aceleración, presión y temperatura. Acondicionamiento de señal." },
-  { semana: 4, fecha: "2026-10-06", tipo: "teoria", contenido: "Tema 7: Actuadores. Solenoides, motores DC (control PWM y puentes H), motores paso a paso y servomotores." },
+  { semana: 1, fecha: "2026-09-15", tipo: "teoria", contenido: "Tema 1: Definición y morfología de robots." },
+  { semana: 1, fecha: "2026-09-17", tipo: "teoria", contenido: "Tema 2: Ejes de coordenadas y configuraciones. Tema 3: Estructura mecánica." },
+  { semana: 2, fecha: "2026-09-22", tipo: "teoria", contenido: "Tema 4: Señales de entrada y salida." },
+  { semana: 2, fecha: "2026-09-24", tipo: "teoria", contenido: "Tema 5: Microprocesador vs. microcontrolador." },
+  { semana: 3, fecha: "2026-09-29", tipo: "teoria", contenido: "Tema 6: Sensores de posición y proximidad." },
+  { semana: 3, fecha: "2026-10-01", tipo: "teoria", contenido: "Tema 6 (cont.): Velocidad, aceleración, presión y temperatura." },
+  { semana: 4, fecha: "2026-10-06", tipo: "teoria", contenido: "Tema 7: Actuadores." },
   { semana: 4, fecha: "2026-10-08", tipo: "laboratorio", contenido: "Práctica 1: Programación de microcontroladores (Arduino)." },
   { semana: 5, fecha: "2026-10-13", tipo: "laboratorio", contenido: "Práctica 2: Adquisición de datos con sensores (Arduino)." },
   { semana: 5, fecha: "2026-10-15", tipo: "laboratorio", contenido: "Práctica 3: Control de actuadores (Arduino)." },
@@ -88,9 +90,9 @@ const CLASES_SECCION_2 = [
   { semana: 8, fecha: "2026-11-05", tipo: "teoria", contenido: "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Arquitectura ROS 2: nodos, tópicos y paradigma publicador/suscriptor. Demostración en MATLAB.", marcador: "Asignación de la Tarea 2" },
   { semana: 9, fecha: "2026-11-10", tipo: "teoria", contenido: "Tema 11: Visión artificial. Procesamiento de imágenes con OpenCV, detección de colores, bordes y reconocimiento de patrones." },
   { semana: 9, fecha: "2026-11-12", tipo: "teoria", contenido: "Tema 12: Redes neuronales y planificación de movimientos (Dijkstra, A*, RRT, RRT*, campos potenciales) aplicados a robótica." },
-  { semana: 10, fecha: "2026-11-17", tipo: "laboratorio", contenido: "Práctica 4: Simulación y control remoto de escenas robóticas (CoppeliaSim + Python)." },
-  { semana: 10, fecha: "2026-11-19", tipo: "laboratorio", contenido: "Práctica 5: Pick and place y trayectorias (Dobot Magician).", marcador: "Entrega de la Tarea 2" },
-  { semana: 11, fecha: "2026-11-24", tipo: "laboratorio", contenido: "Práctica 6: Percepción y navegación en robot móvil (PiCar-X).", marcador: "Coordinación de horarios de defensa" },
+  { semana: 10, fecha: "2026-11-17", tipo: "laboratorio", contenido: "Práctica 4: Programación por bloques de robot móvil (PiCar-X con Blockly)." },
+  { semana: 10, fecha: "2026-11-19", tipo: "laboratorio", contenido: "Práctica 5: Programación en Python desde la Raspberry Pi (PiCar-X).", marcador: "Entrega de la Tarea 2" },
+  { semana: 11, fecha: "2026-11-24", tipo: "laboratorio", contenido: "Práctica 6: Pick and place y generación de trayectorias (Dobot Magician).", marcador: "Coordinación de horarios de defensa" },
   { semana: 11, fecha: "2026-11-26", tipo: "parcial", contenido: "Segundo parcial — Temas 8 al 12." },
   { semana: 12, fecha: "2026-12-01", tipo: "defensa", contenido: "Defensas del Proyecto Final." },
   { semana: 12, fecha: "2026-12-03", tipo: "defensa", contenido: "Defensas del Proyecto Final. Revisión de notas finales." },

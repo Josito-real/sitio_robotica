@@ -11,7 +11,7 @@ export default function Pagina() {
   return (
     <PaginaSimulador
       titulo="Escalamiento ADC"
-      tema="Tema 5"
+      tema="Tema 4"
       resumen="Convierte un voltaje en código digital y escálalo a unidades de ingeniería. Ajusta la resolución y la referencia para ver cómo cambian el escalón de cuantización y el error de la medida."
     >
       <SimuladorADC />

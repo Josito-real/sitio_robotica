@@ -53,7 +53,8 @@ export default function HeroSection() {
 
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
           Trimestre septiembre – diciembre 2026 · Sección 1: lunes y miércoles,
-          7:00 – 8:30 a.m. · Sección 2: martes y jueves, 7:00 – 8:30 a.m.
+          7:00 – 8:30 a.m. · Sección 2: martes y jueves, 7:00 – 8:30 a.m. ·
+          Todas las clases en el Laboratorio de Autómatas
         </p>
 
         <p className="rounded-lg bg-zinc-100 px-4 py-3 text-sm text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">

@@ -4,7 +4,7 @@ export const interactivos = [
   {
     id: "adc",
     titulo: "Escalamiento ADC",
-    tema: "Tema 5",
+    tema: "Tema 4",
     resumen:
       "Convierte un voltaje en código digital y escálalo a unidades de ingeniería. Muestra resolución, error de cuantización y la curva escalera del convertidor.",
     href: "/interactivos/adc",
@@ -13,7 +13,7 @@ export const interactivos = [
   {
     id: "transmision",
     titulo: "Transmisión de potencia",
-    tema: "Tema 7",
+    tema: "Tema 3",
     resumen:
       "Un par de engranajes: cómo la relación de transmisión intercambia velocidad por torque, y qué pasa con la potencia cuando hay pérdidas.",
     href: "/interactivos/transmision",
