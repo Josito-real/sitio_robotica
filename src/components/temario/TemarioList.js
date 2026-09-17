@@ -1,9 +1,12 @@
 import { temario } from "@/data/temario";
+import { laminasDelTema } from "@/data/materiales";
 
 export default function TemarioList() {
   return (
     <ol className="flex flex-col gap-4">
-      {temario.map((tema) => (
+      {temario.map((tema) => {
+        const laminas = laminasDelTema(tema.id);
+        return (
         <li
           key={tema.id}
           className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800"
@@ -26,8 +29,20 @@ export default function TemarioList() {
               {tema.descripcion}
             </p>
           )}
+          {laminas.map((lamina) => (
+            <a
+              key={lamina.id}
+              href={lamina.archivo}
+              target="_blank"
+              rel="noopener"
+              className="mt-4 inline-block text-sm font-medium underline underline-offset-4"
+            >
+              Ver las láminas ({lamina.paginas} páginas, PDF)
+            </a>
+          ))}
         </li>
-      ))}
+        );
+      })}
     </ol>
   );
 }

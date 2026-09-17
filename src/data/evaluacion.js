@@ -67,7 +67,7 @@ export const proyectoFinal = {
   coordinacionDefensa:
     "Cada equipo coordina su horario de defensa con el profesor a partir de la Semana 11.",
   advertencia:
-    "Hay seis semanas entre la publicación de las directrices y la entrega. En proyectos de simulación surgen contratiempos técnicos, y al ser una entrega única no hay puntos de control intermedios que sirvan de red. Conviene empezar en la Semana 6 y no dejar la integración para los últimos días.",
+    "CoppeliaSim y su API remota no se cubren en clase ni en los laboratorios: su aprendizaje corre por cuenta de cada equipo y forma parte de lo que el proyecto evalúa. Hay seis semanas entre la publicación de las directrices y la entrega, y al ser una entrega única no existen puntos de control intermedios que sirvan de red. Conviene empezar en la Semana 6 y no dejar el aprendizaje de la herramienta ni la integración para los últimos días.",
 };
 
 export const parciales = [

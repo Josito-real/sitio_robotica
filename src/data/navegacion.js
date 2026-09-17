@@ -8,6 +8,12 @@ export const enlacesDelCurso = [
     href: "/temario",
   },
   {
+    id: "material",
+    label: "Material de clase",
+    description: "El sílabo y las láminas de cada tema, en PDF.",
+    href: "/material",
+  },
+  {
     id: "cronograma",
     label: "Cronograma",
     description: "Fecha y contenido de cada clase, por sección.",
