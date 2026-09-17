@@ -59,11 +59,19 @@ export default function SimuladorCinematica() {
     <div className="flex flex-col gap-3">
       <svg viewBox="0 0 340 330" className="w-full" role="img">
         <title>Brazo de dos articulaciones y su espacio de trabajo</title>
+        {/* Anillo alcanzable: un solo path con evenodd, así el hueco central
+            es realmente transparente y no un círculo pintado del color del
+            fondo, que se notaba al cambiar de tema. */}
+        <path
+          d={`M ${BX} ${BY} m ${-alcanceMax * escala} 0 a ${alcanceMax * escala} ${alcanceMax * escala} 0 1 0 ${2 * alcanceMax * escala} 0 a ${alcanceMax * escala} ${alcanceMax * escala} 0 1 0 ${-2 * alcanceMax * escala} 0 Z M ${BX} ${BY} m ${-alcanceMin * escala} 0 a ${alcanceMin * escala} ${alcanceMin * escala} 0 1 0 ${2 * alcanceMin * escala} 0 a ${alcanceMin * escala} ${alcanceMin * escala} 0 1 0 ${-2 * alcanceMin * escala} 0 Z`}
+          fillRule="evenodd"
+          className="fill-blue-500/10 stroke-none"
+        />
         <circle
           cx={BX}
           cy={BY}
           r={alcanceMax * escala}
-          className="fill-blue-500/5 stroke-blue-500/40"
+          className="fill-none stroke-blue-500/40"
           strokeDasharray="4 4"
         />
         {alcanceMin > 0.01 && (
@@ -71,7 +79,7 @@ export default function SimuladorCinematica() {
             cx={BX}
             cy={BY}
             r={alcanceMin * escala}
-            className="fill-white stroke-blue-500/40 dark:fill-zinc-950"
+            className="fill-none stroke-blue-500/40"
             strokeDasharray="4 4"
           />
         )}

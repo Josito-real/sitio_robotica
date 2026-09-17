@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 // Respeta la preferencia del sistema de reducir animaciones, sin romper el
 // render del servidor: allí siempre devuelve false.
@@ -14,6 +14,31 @@ export function usePrefiereMenosMovimiento() {
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     () => false
   );
+}
+
+// Ángulo que avanza solo, en grados. Se usa un bucle de animación en vez de
+// CSS para poder acoplar la fase de dos piezas que giran juntas y para no
+// depender de transform-box, que no todos los navegadores aplican igual.
+export function useAnguloAnimado(gradosPorSegundo, activo) {
+  const [angulo, setAngulo] = useState(0);
+
+  useEffect(() => {
+    if (!activo || gradosPorSegundo === 0) return undefined;
+    let cuadro;
+    let previo;
+    const paso = (ahora) => {
+      if (previo !== undefined) {
+        const dt = (ahora - previo) / 1000;
+        setAngulo((actual) => (actual + gradosPorSegundo * dt) % 360);
+      }
+      previo = ahora;
+      cuadro = requestAnimationFrame(paso);
+    };
+    cuadro = requestAnimationFrame(paso);
+    return () => cancelAnimationFrame(cuadro);
+  }, [activo, gradosPorSegundo]);
+
+  return angulo;
 }
 
 export function Control({

@@ -9,6 +9,7 @@ import {
   Formula,
   Nota,
   usePrefiereMenosMovimiento,
+  useAnguloAnimado,
 } from "@/components/interactivos/Primitivos";
 
 const MODOS = {
@@ -41,8 +42,10 @@ export default function SimuladorPWM() {
   const velocidad = modo.gira
     ? Math.max(0, (duty - zonaMuerta) / (100 - zonaMuerta)) * 100
     : 0;
-  const duracionGiro = velocidad > 0 ? Math.max(0.25, 3 / (velocidad / 25)) : 0;
   const animando = velocidad > 0 && !menosMovimiento;
+  // 100% de velocidad relativa equivale a una vuelta por segundo en pantalla.
+  const sentido = modo.sentido === "antihorario" ? -1 : 1;
+  const anguloRotor = useAnguloAnimado(sentido * velocidad * 3.6, animando);
 
   // Onda: tres periodos dentro del lienzo.
   const X0 = 40;
@@ -101,18 +104,7 @@ export default function SimuladorPWM() {
         <svg viewBox="0 0 120 120" className="w-28 shrink-0" role="img">
           <title>Rotor del motor</title>
           <circle cx="60" cy="60" r="46" className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-800 dark:stroke-zinc-500" />
-          <g
-            style={{
-              transformBox: "fill-box",
-              transformOrigin: "center",
-              animationName:
-                modo.sentido === "antihorario" ? "girar-antihorario" : "girar-horario",
-              animationDuration: `${duracionGiro || 1}s`,
-              animationTimingFunction: "linear",
-              animationIterationCount: "infinite",
-              animationPlayState: animando ? "running" : "paused",
-            }}
-          >
+          <g transform={`rotate(${anguloRotor} 60 60)`}>
             <circle cx="60" cy="60" r="30" className="fill-white stroke-zinc-400 dark:fill-zinc-900 dark:stroke-zinc-600" />
             <line x1="60" y1="60" x2="60" y2="32" className="stroke-blue-500" strokeWidth="3" strokeLinecap="round" />
             <line x1="60" y1="60" x2="60" y2="88" className="stroke-zinc-300 dark:stroke-zinc-600" strokeWidth="3" strokeLinecap="round" />

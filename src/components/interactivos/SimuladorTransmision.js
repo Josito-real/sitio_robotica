@@ -9,54 +9,55 @@ import {
   Formula,
   Nota,
   usePrefiereMenosMovimiento,
+  useAnguloAnimado,
 } from "@/components/interactivos/Primitivos";
+import {
+  disponerPar,
+  anguloConducido,
+  contornoComoPath,
+} from "@/components/interactivos/geometriaEngranajes";
 
 const MODULOS = [0.5, 1, 1.5, 2].map((m) => ({
   valor: m,
   etiqueta: `m = ${m} mm`,
 }));
 
-// Dibuja una rueda dentada sencilla: circunferencia primitiva más un diente
-// radial por cada Z. No es un perfil de evolvente, solo una representación.
-function Engranaje({ dientes, radio, duracion, sentido, animando }) {
-  const paso = 360 / dientes;
-  const alturaDiente = Math.max(3, radio * 0.12);
+const ANCHO = 340;
+const ALTO = 240;
+const GRADOS_POR_SEGUNDO_MAX = 220;
 
+function Rueda({ cx, cy, radio, cabeza, dientes, angulo, acento }) {
   return (
-    <g
-      style={{
-        transformBox: "fill-box",
-        transformOrigin: "center",
-        animationName: sentido === "horario" ? "girar-horario" : "girar-antihorario",
-        animationDuration: `${duracion}s`,
-        animationTimingFunction: "linear",
-        animationIterationCount: "infinite",
-        animationPlayState: animando ? "running" : "paused",
-      }}
-    >
-      <circle r={radio} className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-800 dark:stroke-zinc-500" />
-      <circle r={radio * 0.18} className="fill-white stroke-zinc-400 dark:fill-zinc-900 dark:stroke-zinc-500" />
-      {Array.from({ length: dientes }, (_, k) => (
+    <g transform={`translate(${cx} ${cy})`}>
+      <path
+        d={contornoComoPath(radio, cabeza, dientes, angulo)}
+        className={
+          acento
+            ? "fill-blue-500/15 stroke-blue-500"
+            : "fill-zinc-200/60 stroke-zinc-500 dark:fill-zinc-700/50 dark:stroke-zinc-400"
+        }
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <circle
+        r={radio}
+        className="fill-none stroke-zinc-400/60 dark:stroke-zinc-500/60"
+        strokeDasharray="3 3"
+      />
+      <g transform={`rotate(${angulo})`}>
         <line
-          key={k}
           x1={0}
-          y1={-radio}
-          x2={0}
-          y2={-radio - alturaDiente}
-          transform={`rotate(${k * paso})`}
-          className="stroke-zinc-500 dark:stroke-zinc-400"
-          strokeWidth="2"
+          y1={0}
+          x2={radio * 0.78}
+          y2={0}
+          className={acento ? "stroke-blue-600" : "stroke-zinc-600 dark:stroke-zinc-300"}
+          strokeWidth="2.5"
           strokeLinecap="round"
         />
-      ))}
-      <line
-        x1={0}
-        y1={0}
-        x2={0}
-        y2={-radio * 0.8}
-        className="stroke-blue-500"
-        strokeWidth="2.5"
-        strokeLinecap="round"
+      </g>
+      <circle
+        r={Math.max(3, radio * 0.12)}
+        className="fill-white stroke-zinc-500 dark:fill-zinc-900 dark:stroke-zinc-400"
       />
     </g>
   );
@@ -83,50 +84,61 @@ export default function SimuladorTransmision() {
   const p1 = t1 * w1;
   const p2 = t2 * w2;
 
-  const d1 = modulo * z1;
-  const d2 = modulo * z2;
-  const distanciaCentros = (d1 + d2) / 2;
+  const par = disponerPar({ z1, z2, modulo, ancho: ANCHO, alto: ALTO });
 
-  // Escala de dibujo: el par siempre cabe en el lienzo.
-  const escala = 150 / (d1 / 2 + d2 / 2 + modulo * 4);
-  const r1 = (d1 / 2) * escala;
-  const r2 = (d2 / 2) * escala;
-  const cx1 = 170 - r2;
-  const cx2 = 170 + r1;
-
-  // La animación es una representación: se acota para que siga siendo legible.
-  const duracion1 = Math.max(0.35, (60 / n1) * 3.3);
-  const duracion2 = duracion1 * i;
+  // El dibujo va más lento que la realidad para seguir siendo legible, pero la
+  // relación entre ambos ejes es exacta: el ángulo del conducido se calcula a
+  // partir del motriz.
+  const gradosPorSegundo = Math.min(n1 * 6, GRADOS_POR_SEGUNDO_MAX);
+  const anguloMotriz = useAnguloAnimado(gradosPorSegundo, animando);
+  const anguloSalida = anguloConducido(anguloMotriz, z1, z2);
 
   const visual = (
     <div className="flex flex-col gap-3">
-      <svg viewBox="0 0 340 220" className="w-full" role="img">
-        <title>Par de engranajes girando en sentidos opuestos</title>
-        <g transform={`translate(${cx1} 110)`}>
-          <Engranaje
-            dientes={z1}
-            radio={r1}
-            duracion={duracion1}
-            sentido="horario"
-            animando={animando}
-          />
-        </g>
-        <g transform={`translate(${cx2} 110)`}>
-          <Engranaje
-            dientes={z2}
-            radio={r2}
-            duracion={duracion2}
-            sentido="antihorario"
-            animando={animando}
-          />
-        </g>
-        <text x={cx1} y={206} fontSize="11" textAnchor="middle" className="fill-zinc-500">
-          entrada · {z1} dientes
-        </text>
-        <text x={cx2} y={206} fontSize="11" textAnchor="middle" className="fill-zinc-500">
-          salida · {z2} dientes
+      <svg viewBox={`0 0 ${ANCHO} ${ALTO}`} className="w-full" role="img">
+        <title>
+          Par de engranajes engranando: el piñón mueve a la corona en sentido
+          contrario
+        </title>
+        <Rueda
+          cx={par.c1x}
+          cy={par.cy}
+          radio={par.r1}
+          cabeza={par.cabeza}
+          dientes={z1}
+          angulo={anguloMotriz}
+          acento
+        />
+        <Rueda
+          cx={par.c2x}
+          cy={par.cy}
+          radio={par.r2}
+          cabeza={par.cabeza}
+          dientes={z2}
+          angulo={anguloSalida}
+        />
+        <circle
+          cx={par.c1x + par.r1}
+          cy={par.cy}
+          r="3.5"
+          className="fill-amber-500"
+        />
+        <text
+          x={par.c1x + par.r1}
+          y={par.cy - 10}
+          fontSize="10"
+          textAnchor="middle"
+          className="fill-amber-600"
+        >
+          punto de contacto
         </text>
       </svg>
+
+      <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
+        <span>Entrada · piñón de {z1} dientes · {n1} rpm</span>
+        <span>Salida · corona de {z2} dientes · {n2.toFixed(0)} rpm</span>
+      </div>
+
       <button
         type="button"
         onClick={() => setAnimarManual(!animando)}
@@ -135,9 +147,8 @@ export default function SimuladorTransmision() {
         {animando ? "Pausar giro" : "Reanudar giro"}
       </button>
       <p className="text-xs text-zinc-500 dark:text-zinc-400">
-        La velocidad del dibujo está acotada para que siga siendo legible: lo
-        fiel es la proporción entre ambos ejes, no las revoluciones por segundo
-        en pantalla.
+        El giro en pantalla está frenado para que se pueda seguir con la vista.
+        Lo fiel es la proporción: cuenta las vueltas de uno y de otro.
       </p>
     </div>
   );
@@ -192,16 +203,27 @@ export default function SimuladorTransmision() {
     </>
   );
 
+  const velocidadContacto = w1 * (par.d1 / 2 / 1000);
+
   const lecturas = (
     <>
       <Lectura etiqueta="Relación de transmisión" valor={`${i.toFixed(2)} : 1`} destacado />
       <Lectura etiqueta="Velocidad de salida" valor={n2.toFixed(1)} unidad="rpm" />
       <Lectura etiqueta="Torque de salida" valor={t2.toFixed(3)} unidad="N·m" destacado />
+      <Lectura
+        etiqueta="Velocidad en el contacto"
+        valor={velocidadContacto.toFixed(2)}
+        unidad="m/s"
+      />
       <Lectura etiqueta="Potencia de entrada" valor={p1.toFixed(1)} unidad="W" />
       <Lectura etiqueta="Potencia de salida" valor={p2.toFixed(1)} unidad="W" />
       <Lectura etiqueta="Pérdidas" valor={(p1 - p2).toFixed(1)} unidad="W" />
-      <Lectura etiqueta="Diámetros primitivos" valor={`${d1} / ${d2}`} unidad="mm" />
-      <Lectura etiqueta="Distancia entre centros" valor={distanciaCentros.toFixed(1)} unidad="mm" />
+      <Lectura etiqueta="Diámetros primitivos" valor={`${par.d1} / ${par.d2}`} unidad="mm" />
+      <Lectura
+        etiqueta="Distancia entre centros"
+        valor={par.distanciaCentrosMm.toFixed(1)}
+        unidad="mm"
+      />
     </>
   );
 
@@ -209,15 +231,29 @@ export default function SimuladorTransmision() {
     <>
       <Nota>
         <p>
-          Aumenta los dientes de la corona dejando todo lo demás quieto: la
-          velocidad de salida cae en la misma proporción en que sube el torque.
-          Esa es toda la idea de un reductor — no crea energía, redistribuye
-          velocidad y torque.
+          Sigue la marca de cada rueda: con la corona en 48 dientes y el piñón
+          en 12, el piñón da cuatro vueltas por cada una de la corona. Esa es la
+          relación de transmisión, y es también el factor por el que sube el
+          torque y baja la velocidad.
         </p>
         <p>
           Mira las dos potencias: la de salida nunca supera la de entrada, y la
           diferencia es lo que se pierde en fricción. Baja el rendimiento al 60%
           y observa cuánta potencia se va en calor.
+        </p>
+      </Nota>
+      <Nota titulo="El punto de contacto">
+        <p>
+          En el punto amarillo los dos dientes se tocan, así que ahí ambas
+          ruedas llevan la misma velocidad lineal: ω₁·r₁ = ω₂·r₂. De esa
+          igualdad sale todo lo demás. La rueda grande gira más despacio porque
+          tiene que recorrer más circunferencia para la misma velocidad en el
+          contacto.
+        </p>
+        <p>
+          Los dientes engranan de verdad en el dibujo: el ángulo de la corona se
+          calcula a partir del piñón, con medio paso de desfase, que es lo que
+          hace que un diente caiga siempre en un hueco.
         </p>
       </Nota>
       <Nota titulo="Por qué importa en robótica">
