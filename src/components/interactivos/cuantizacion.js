@@ -36,6 +36,17 @@ export function pasoDeslizador(lsb) {
   return Math.min(paso, 0.01);
 }
 
+// Ventana del zoom anclada a bloques fijos de códigos. Centrarla en el código
+// actual la dejaba idéntica en pantalla para cualquier entrada: el escalón
+// resaltado caía siempre en el mismo sitio y la imagen parecía congelada.
+// Anclada, el punto recorre la ventana y esta salta cada `ventana` códigos.
+export function ventanaZoom(codigo, niveles, ventana = 8) {
+  const tope = Math.max(0, niveles - ventana);
+  const cMin = Math.min(Math.floor(codigo / ventana) * ventana, tope);
+  const cMax = Math.min(niveles - 1, cMin + ventana - 1);
+  return { cMin, cMax, posicion: codigo - cMin };
+}
+
 export function decimalesUtiles(lsb) {
   if (lsb >= 0.01) return 3;
   if (lsb >= 0.001) return 4;

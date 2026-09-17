@@ -15,6 +15,7 @@ import {
   pasoDeslizador,
   decimalesUtiles,
   curvaError,
+  ventanaZoom,
 } from "@/components/interactivos/cuantizacion";
 
 const ESCALAS = [
@@ -26,6 +27,15 @@ const ESCALAS = [
 const BITS = [8, 10, 12, 16].map((b) => ({ valor: b, etiqueta: `${b} bits` }));
 const VREFS = [1.1, 3.3, 5].map((v) => ({ valor: v, etiqueta: `${v} V` }));
 const VIN_MAX = 6;
+
+// Un píxel del deslizador vale cientos de códigos en alta resolución, así que
+// el paso fino se mueve en unidades de LSB, no de voltios.
+const FINOS = [
+  { delta: -1, etiqueta: "−1 LSB" },
+  { delta: -0.25, etiqueta: "−¼ LSB" },
+  { delta: 0.25, etiqueta: "+¼ LSB" },
+  { delta: 1, etiqueta: "+1 LSB" },
+];
 
 function binarioAgrupado(codigo, bits) {
   const crudo = codigo.toString(2).padStart(bits, "0");
@@ -48,10 +58,8 @@ export default function SimuladorADC() {
   const paso = pasoDeslizador(q.lsb);
   const decimales = decimalesUtiles(q.lsb);
 
-  // Ventana del zoom: ocho escalones alrededor del código actual.
-  const ventana = 8;
-  const cMax = Math.min(q.niveles - 1, Math.max(0, q.codigo - 3) + ventana - 1);
-  const cMin = Math.max(0, cMax - ventana + 1);
+  // Ventana del zoom: el bloque de ocho escalones donde cae la entrada.
+  const { cMin, cMax } = ventanaZoom(q.codigo, q.niveles, 8);
   const vLo = cMin * q.lsb;
   const vHi = (cMax + 1) * q.lsb;
 
@@ -146,7 +154,7 @@ export default function SimuladorADC() {
 
       <div>
         <p className="mb-1 text-sm font-medium">
-          Zoom: ocho escalones alrededor del código actual
+          Zoom: el bloque de ocho escalones donde cae la entrada
         </p>
         <svg viewBox="0 0 340 164" className="w-full" role="img">
           <title>Escalones de cuantización alrededor del punto de trabajo</title>
@@ -190,9 +198,11 @@ export default function SimuladorADC() {
           <text x={X0 - 6} y={yZoom(cMin) + 3} fontSize="10" textAnchor="end" className="fill-zinc-500">
             {cMin}
           </text>
-          <text x={X0 - 6} y={yZoom(q.codigo) + 3} fontSize="10" textAnchor="end" className="fill-blue-500">
-            {q.codigo}
-          </text>
+          {q.codigo !== cMin && (
+            <text x={X0 - 6} y={yZoom(q.codigo) + 3} fontSize="10" textAnchor="end" className="fill-blue-500">
+              {q.codigo}
+            </text>
+          )}
         </svg>
       </div>
 
@@ -244,8 +254,27 @@ export default function SimuladorADC() {
         paso={paso}
         unidad="V"
         decimales={decimales}
-        ayuda={`El paso del deslizador se ajusta solo a la resolución: ahora ${(paso * 1000).toFixed(3)} mV, un cuarto de LSB.`}
+        ayuda={`Con el teclado el paso es de ${(paso * 1000).toFixed(3)} mV. Con el ratón usa el ajuste fino: un píxel del deslizador vale ${(0.02 / q.lsb).toFixed(0)} códigos.`}
       />
+      <div>
+        <span className="text-sm font-medium">Ajuste fino</span>
+        <div className="mt-2 grid grid-cols-4 gap-2">
+          {FINOS.map((fino) => (
+            <button
+              key={fino.delta}
+              type="button"
+              onClick={() =>
+                setVin((v) =>
+                  Math.min(VIN_MAX, Math.max(0, v + fino.delta * q.lsb))
+                )
+              }
+              className="rounded-lg border border-zinc-300 px-2 py-2 text-sm font-medium text-zinc-600 transition-colors hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-400"
+            >
+              {fino.etiqueta}
+            </button>
+          ))}
+        </div>
+      </div>
       <Opciones
         etiqueta="Magnitud medida"
         valor={escalaId}
@@ -292,9 +321,14 @@ export default function SimuladorADC() {
           de incertidumbre de la medida por bueno que sea el sensor.
         </p>
         <p>
-          El deslizador ajusta su paso a la resolución elegida, así que en 16
-          bits se mueve de a 10 µV. Con un paso fijo de 1 mV no se podría
-          recorrer un solo escalón: cada movimiento saltaría trece códigos.
+          Con el deslizador solo no se puede recorrer la ventana: en 16 bits un
+          LSB son 76 µV, y un píxel del deslizador vale más de doscientos
+          códigos. Para eso están los botones de ajuste fino. Pulsa{" "}
+          <span className="font-mono">+1 LSB</span> varias veces y el escalón
+          azul avanza por la ventana; al pasar del octavo, la ventana salta al
+          bloque siguiente. Con <span className="font-mono">+¼ LSB</span> el
+          código no cambia: lo que sube es el error, y el punto trepa el diente
+          de sierra hasta caer de golpe al entrar al escalón siguiente.
         </p>
       </Nota>
       <Nota titulo="Saturación">
