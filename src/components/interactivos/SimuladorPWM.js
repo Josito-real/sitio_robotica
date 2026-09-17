@@ -36,6 +36,8 @@ export default function SimuladorPWM() {
 
   const modo = MODOS[`${in1}-${in2}`];
   const vMedio = (duty / 100) * vcc;
+  // El valor medio gobierna la velocidad; el eficaz, el calentamiento.
+  const vRms = vcc * Math.sqrt(duty / 100);
   const periodoMs = 1000 / frecuencia;
   const tOn = (periodoMs * duty) / 100;
   const analogWrite = Math.round((duty / 100) * 255);
@@ -209,6 +211,7 @@ export default function SimuladorPWM() {
   const lecturas = (
     <>
       <Lectura etiqueta="Voltaje medio" valor={vMedio.toFixed(2)} unidad="V" destacado />
+      <Lectura etiqueta="Voltaje eficaz (RMS)" valor={vRms.toFixed(2)} unidad="V" />
       <Lectura etiqueta="Valor de analogWrite()" valor={analogWrite} />
       <Lectura etiqueta="Periodo" valor={periodoMs.toFixed(3)} unidad="ms" />
       <Lectura etiqueta="Tiempo en alto" valor={tOn.toFixed(3)} unidad="ms" />
@@ -232,6 +235,12 @@ export default function SimuladorPWM() {
           la señal existe pero el motor no arranca porque no vence su fricción
           estática. Es la razón por la que un robot móvil no puede ir
           arbitrariamente lento con control en lazo abierto.
+        </p>
+        <p>
+          Compara los dos voltajes: al 25% de ciclo el medio es la cuarta parte
+          de Vcc, pero el eficaz es la mitad, porque vale Vcc·√D. La velocidad
+          sigue al valor medio y el calentamiento de los devanados al eficaz —
+          por eso un motor puede calentarse más de lo que su velocidad sugiere.
         </p>
       </Nota>
       <Nota titulo="Sobre la frecuencia y el puente H">
