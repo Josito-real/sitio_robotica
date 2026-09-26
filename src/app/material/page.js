@@ -51,6 +51,7 @@ export default function MaterialPage() {
                 archivo={lamina.archivo}
                 paginas={lamina.paginas}
                 peso={lamina.peso}
+                proximamente={lamina.estado === "proximamente"}
               />
             ))}
           </div>

@@ -6,6 +6,9 @@ export default function TemarioList() {
     <ol className="flex flex-col gap-4">
       {temario.map((tema) => {
         const laminas = laminasDelTema(tema.id);
+        const disponibles = laminas.filter(
+          (lamina) => lamina.estado !== "proximamente"
+        );
         return (
         <li
           key={tema.id}
@@ -29,9 +32,9 @@ export default function TemarioList() {
               {tema.descripcion}
             </p>
           )}
-          {laminas.length > 0 && (
+          {disponibles.length > 0 && (
             <ul className="mt-4 flex flex-col gap-1">
-              {laminas.map((lamina) => (
+              {disponibles.map((lamina) => (
                 <li key={lamina.id}>
                   <a
                     href={lamina.archivo}
@@ -39,7 +42,7 @@ export default function TemarioList() {
                     rel="noopener"
                     className="text-sm font-medium underline underline-offset-4"
                   >
-                    {laminas.length > 1
+                    {disponibles.length > 1
                       ? `${lamina.parte} ${lamina.titulo}`
                       : "Ver las láminas"}{" "}
                     ({lamina.paginas} páginas, PDF)
@@ -47,6 +50,11 @@ export default function TemarioList() {
                 </li>
               ))}
             </ul>
+          )}
+          {disponibles.length === 0 && laminas.length > 0 && (
+            <p className="mt-4 text-sm text-zinc-400 dark:text-zinc-500">
+              Láminas: se publican después de la clase.
+            </p>
           )}
         </li>
         );
