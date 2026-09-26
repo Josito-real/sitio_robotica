@@ -29,17 +29,25 @@ export default function TemarioList() {
               {tema.descripcion}
             </p>
           )}
-          {laminas.map((lamina) => (
-            <a
-              key={lamina.id}
-              href={lamina.archivo}
-              target="_blank"
-              rel="noopener"
-              className="mt-4 inline-block text-sm font-medium underline underline-offset-4"
-            >
-              Ver las láminas ({lamina.paginas} páginas, PDF)
-            </a>
-          ))}
+          {laminas.length > 0 && (
+            <ul className="mt-4 flex flex-col gap-1">
+              {laminas.map((lamina) => (
+                <li key={lamina.id}>
+                  <a
+                    href={lamina.archivo}
+                    target="_blank"
+                    rel="noopener"
+                    className="text-sm font-medium underline underline-offset-4"
+                  >
+                    {laminas.length > 1
+                      ? `${lamina.parte} ${lamina.titulo}`
+                      : "Ver las láminas"}{" "}
+                    ({lamina.paginas} páginas, PDF)
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
         );
       })}

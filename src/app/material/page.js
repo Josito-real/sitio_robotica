@@ -43,7 +43,11 @@ export default function MaterialPage() {
                 key={lamina.id}
                 titulo={lamina.titulo}
                 descripcion={lamina.descripcion}
-                etiqueta={lamina.tema ? `Tema ${lamina.tema}` : "Presentación inicial"}
+                etiqueta={
+                  lamina.tema
+                    ? `Tema ${lamina.tema}${lamina.parte ? ` · ${lamina.parte}` : ""}`
+                    : "Presentación inicial"
+                }
                 archivo={lamina.archivo}
                 paginas={lamina.paginas}
                 peso={lamina.peso}
