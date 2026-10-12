@@ -94,6 +94,29 @@ export function Parciales() {
               </li>
             ))}
           </ul>
+          {parcial.modelos && (
+            <div className="mt-4 border-t border-dashed border-zinc-200 pt-3 dark:border-zinc-700">
+              <p className="text-sm font-medium">Modelos de práctica</p>
+              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                Misma estructura, pesos y duración que el parcial, con preguntas
+                distintas. Cada uno trae su solucionario al final.
+              </p>
+              <ul className="mt-2 space-y-1">
+                {parcial.modelos.map((modelo) => (
+                  <li key={modelo.id}>
+                    <a
+                      href={modelo.archivo}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-sm font-medium underline underline-offset-4"
+                    >
+                      {modelo.nombre} ({modelo.paginas} páginas, PDF)
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </article>
       ))}
     </div>

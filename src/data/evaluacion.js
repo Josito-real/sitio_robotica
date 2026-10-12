@@ -83,6 +83,22 @@ export const parciales = [
       { seccion: "Sección 1 — lunes y miércoles", fecha: "Lunes 19 de octubre" },
       { seccion: "Sección 2 — martes y jueves", fecha: "Martes 20 de octubre" },
     ],
+    modelos: [
+      {
+        id: "parcial-1-modelo-a",
+        nombre: "Modelo de práctica A",
+        archivo: "/documentos/parcial-1-modelo-a.pdf",
+        paginas: 6,
+        peso: "193 KB",
+      },
+      {
+        id: "parcial-1-modelo-b",
+        nombre: "Modelo de práctica B",
+        archivo: "/documentos/parcial-1-modelo-b.pdf",
+        paginas: 6,
+        peso: "196 KB",
+      },
+    ],
   },
   {
     id: "parcial-2",
