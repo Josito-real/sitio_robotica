@@ -3,6 +3,7 @@ import Container from "@/components/layout/Container";
 import TablaPonderaciones from "@/components/evaluacion/TablaPonderaciones";
 import {
   TareasMatlab,
+  EjercicioEnClase,
   ProyectoFinal,
   Parciales,
 } from "@/components/evaluacion/DetalleEvaluaciones";
@@ -65,7 +66,11 @@ export default function EvaluacionPage() {
           </div>
         </Bloque>
 
-        <Bloque titulo="Tareas de MATLAB · 10%">
+        <Bloque titulo="Ejercicio evaluado en clase · 5%">
+          <EjercicioEnClase />
+        </Bloque>
+
+        <Bloque titulo="Tarea de MATLAB · 5%">
           <TareasMatlab />
         </Bloque>
 

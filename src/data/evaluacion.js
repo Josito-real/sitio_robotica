@@ -6,10 +6,18 @@ export const componentes = [
     descripcion: "6 prácticas de laboratorio × 5% cada una.",
   },
   {
+    id: "ejercicio-dh",
+    nombre: "Ejercicio evaluado en clase",
+    peso: "5%",
+    descripcion:
+      "Parámetros Denavit-Hartenberg con verificación en MATLAB — Semana 8.",
+  },
+  {
     id: "matlab",
-    nombre: "Tareas de MATLAB",
-    peso: "10%",
-    descripcion: "2 tareas individuales × 5% cada una.",
+    nombre: "Tarea de MATLAB",
+    peso: "5%",
+    descripcion:
+      "1 tarea individual — se asigna en la Semana 8 y se entrega en la Semana 10.",
   },
   {
     id: "proyecto",
@@ -33,27 +41,28 @@ export const componentes = [
 
 export const tareasMatlab = [
   {
-    numero: 1,
-    titulo: "Cinemática con MATLAB",
-    peso: "5%",
-    descripcion:
-      "Resolución de problemas de cinemática directa e inversa sobre un manipulador dado: construcción de la tabla de parámetros Denavit-Hartenberg, obtención de las matrices de transformación homogénea, cálculo de la matriz Jacobiana y análisis del espacio de trabajo.",
-    asignacion: "Clase de MATLAB de la Semana 7.",
-    entrega: "Primera clase de la Semana 8, a través de Aulas Virtuales.",
-    herramientas:
-      "MATLAB R2025b, Robotics System Toolbox y Symbolic Math Toolbox.",
-  },
-  {
     numero: 2,
     titulo: "Simulación bajo el paradigma ROS 2",
     peso: "5%",
     descripcion:
       "Implementación en MATLAB de una estructura distribuida bajo el paradigma ROS 2: creación de nodos, definición de tópicos y comunicación entre publicadores y suscriptores para un escenario robótico propuesto.",
-    asignacion: "Segunda clase de la Semana 8.",
+    asignacion: "Primera clase de la Semana 8.",
     entrega: "Segunda clase de la Semana 10, a través de Aulas Virtuales.",
     herramientas: "MATLAB R2025b y ROS Toolbox.",
   },
 ];
+
+export const ejercicioEnClase = {
+  titulo: "Parámetros Denavit-Hartenberg con verificación en MATLAB",
+  peso: "5%",
+  momento: "Semana 8, segunda clase",
+  descripcion:
+    "Resolución de los parámetros Denavit-Hartenberg de un manipulador, en los mismos equipos de laboratorio, con verificación posterior usando las herramientas de MATLAB suministradas por el profesor.",
+  fechas: [
+    { seccion: "Sección 1 — lunes y miércoles", fecha: "Miércoles 4 de noviembre" },
+    { seccion: "Sección 2 — martes y jueves", fecha: "Jueves 5 de noviembre" },
+  ],
+};
 
 export const proyectoFinal = {
   peso: "20% de la nota final",
@@ -154,17 +163,12 @@ export const fechasClave = [
     seccion2: "Jueves 22 de octubre",
   },
   {
-    hito: "Asignación de la Tarea 1 (MATLAB)",
-    seccion1: "Miércoles 28 de octubre",
-    seccion2: "Jueves 29 de octubre",
-  },
-  {
-    hito: "Entrega de la Tarea 1",
+    hito: "Asignación de la Tarea 2 (MATLAB)",
     seccion1: "Lunes 2 de noviembre",
     seccion2: "Martes 3 de noviembre",
   },
   {
-    hito: "Asignación de la Tarea 2 (MATLAB)",
+    hito: "Ejercicio evaluado en clase (5%)",
     seccion1: "Miércoles 4 de noviembre",
     seccion2: "Jueves 5 de noviembre",
   },

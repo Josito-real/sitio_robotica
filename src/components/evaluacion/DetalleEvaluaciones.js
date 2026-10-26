@@ -1,4 +1,9 @@
-import { tareasMatlab, proyectoFinal, parciales } from "@/data/evaluacion";
+import {
+  tareasMatlab,
+  ejercicioEnClase,
+  proyectoFinal,
+  parciales,
+} from "@/data/evaluacion";
 
 function Dato({ etiqueta, children }) {
   return (
@@ -35,6 +40,35 @@ export function TareasMatlab() {
           </dl>
         </article>
       ))}
+    </div>
+  );
+}
+
+export function EjercicioEnClase() {
+  return (
+    <div className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
+      <h3 className="font-semibold">
+        {ejercicioEnClase.titulo}{" "}
+        <span className="text-zinc-400 dark:text-zinc-500">
+          ({ejercicioEnClase.peso})
+        </span>
+      </h3>
+      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+        {ejercicioEnClase.momento}
+      </p>
+      <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-300">
+        {ejercicioEnClase.descripcion}
+      </p>
+      <ul className="mt-4 space-y-1 border-t border-dashed border-zinc-200 pt-3 text-sm dark:border-zinc-700">
+        {ejercicioEnClase.fechas.map((fecha) => (
+          <li key={fecha.seccion} className="flex flex-wrap gap-x-2">
+            <span className="text-zinc-500 dark:text-zinc-400">
+              {fecha.seccion}:
+            </span>
+            <span className="font-medium">{fecha.fecha}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

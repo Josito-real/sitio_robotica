@@ -31,8 +31,9 @@ export default function HeroSection() {
             robótica propia.
           </p>
           <p>
-            La nota se reparte entre 6 prácticas de laboratorio (30%), 2 tareas
-            de MATLAB (10%), el proyecto final (20%) y dos parciales (40%).
+            La nota se reparte entre 6 prácticas de laboratorio (30%), un
+            ejercicio evaluado en clase (5%), una tarea de MATLAB (5%), el
+            proyecto final (20%) y dos parciales (40%).
           </p>
         </div>
 
