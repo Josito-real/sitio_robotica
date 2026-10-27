@@ -1,5 +1,6 @@
 import { temario } from "@/data/temario";
-import { laminasDelTema } from "@/data/materiales";
+import { laminasDelTema, recursosDelTema } from "@/data/materiales";
+import RecursoTema from "@/components/temario/RecursoTema";
 
 export default function TemarioList() {
   return (
@@ -9,6 +10,7 @@ export default function TemarioList() {
         const disponibles = laminas.filter(
           (lamina) => lamina.estado !== "proximamente"
         );
+        const recursos = recursosDelTema(tema.id);
         return (
         <li
           key={tema.id}
@@ -56,6 +58,9 @@ export default function TemarioList() {
               Láminas: se publican después de la clase.
             </p>
           )}
+          {recursos.map((recurso) => (
+            <RecursoTema key={recurso.id} recurso={recurso} />
+          ))}
         </li>
         );
       })}

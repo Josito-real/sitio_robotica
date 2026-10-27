@@ -214,6 +214,44 @@ export const laminas = [
   },
 ];
 
+// Material de preparación de un tema: archivos que no son solo láminas
+// (guía más paquete de trabajo) y los pasos para usarlos.
+export const recursosDeTema = [
+  {
+    id: "tema-8-herramienta-cinematica",
+    tema: 8,
+    titulo: "Herramienta de cinemática en MATLAB — material de preparación",
+    descripcion:
+      "Guía para instalar MATLAB con la licencia de UNIMET, conocer la herramienta de cinemática y practicar con un robot de ejemplo de 5 grados de libertad: tabla de Denavit-Hartenberg, cinemática directa e inversa, espacio de trabajo y simulación de láser y pinza.",
+    archivos: [
+      {
+        id: "guia",
+        etiqueta: "Guía (PDF)",
+        archivo: "/materiales/tema-8/Guia_Herramienta_Cinematica.pdf",
+      },
+      {
+        id: "paquete",
+        etiqueta: "Paquete MATLAB (.zip)",
+        archivo: "/materiales/tema-8/Herramienta_Cinematica_Practica.zip",
+        descargar: true,
+      },
+    ],
+    detalleArchivos: "La guía tiene 24 páginas (1,5 MB); el paquete pesa 235 KB.",
+    requisitos:
+      "MATLAB R2021a o posterior con Robotics System Toolbox (incluidos en la licencia institucional de UNIMET).",
+    pasos: [
+      "Lee la guía e instala MATLAB.",
+      "Descomprime el .zip y abre tarea_cinematica.m.",
+      "Ejecuta el script por secciones (Ctrl + Enter).",
+      "Deriva la tabla DH del modelo de práctica en tabla_dh.m, verifícala con la sección 3 y compárala después con tabla_dh_solucion.m.",
+    ],
+  },
+];
+
+export function recursosDelTema(numeroDeTema) {
+  return recursosDeTema.filter((recurso) => recurso.tema === numeroDeTema);
+}
+
 export function laminasDelTema(numeroDeTema) {
   return laminas.filter((lamina) => lamina.tema === numeroDeTema);
 }
