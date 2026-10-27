@@ -82,13 +82,73 @@ export function ProyectoFinal() {
       <dl className="mt-5 space-y-1.5 text-sm">
         <Dato etiqueta="Peso:">{proyectoFinal.peso}</Dato>
         <Dato etiqueta="Modalidad:">{proyectoFinal.modalidad}</Dato>
-        <Dato etiqueta="Herramientas:">{proyectoFinal.herramientas}</Dato>
         <Dato etiqueta="Directrices:">
           {proyectoFinal.publicacionDirectrices}
         </Dato>
-        <Dato etiqueta="Entrega y defensa:">{proyectoFinal.entrega}</Dato>
       </dl>
-      <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-300">
+
+      <a
+        href={proyectoFinal.directrices.archivo}
+        target="_blank"
+        rel="noopener"
+        className="mt-5 inline-block rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+      >
+        Descargar las directrices ({proyectoFinal.directrices.paginas} páginas,
+        PDF)
+      </a>
+
+      <h4 className="mt-6 font-semibold">Los tres cortes</h4>
+      <ul className="mt-3 space-y-3">
+        {proyectoFinal.cortes.map((corte) => (
+          <li
+            key={corte.id}
+            className="rounded-lg bg-zinc-50 px-4 py-3 dark:bg-zinc-900"
+          >
+            <p className="text-sm font-medium">
+              {corte.nombre}{" "}
+              <span className="text-zinc-400 dark:text-zinc-500">
+                ({corte.peso})
+              </span>
+            </p>
+            <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
+              {corte.fecha}
+            </p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
+              {corte.detalle}
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      <h4 className="mt-6 font-semibold">Las tres rutas</h4>
+      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
+        Cada equipo elige una:
+      </p>
+      <ul className="mt-3 space-y-2">
+        {proyectoFinal.rutas.map((ruta) => (
+          <li key={ruta.id} className="text-sm">
+            <span className="font-medium text-zinc-700 dark:text-zinc-200">
+              {ruta.nombre}
+            </span>
+            <span className="text-zinc-600 dark:text-zinc-300">
+              {" "}
+              — {ruta.detalle}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <h4 className="mt-6 font-semibold">El piso común</h4>
+      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
+        Sea cual sea la ruta, todo proyecto cumple:
+      </p>
+      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+        {proyectoFinal.pisoComun.map((punto) => (
+          <li key={punto}>{punto}</li>
+        ))}
+      </ul>
+
+      <p className="mt-5 text-sm text-zinc-600 dark:text-zinc-300">
         {proyectoFinal.coordinacionDefensa}
       </p>
       <p className="mt-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:bg-amber-900/20 dark:text-amber-300">

@@ -20,10 +20,25 @@ export const componentes = [
       "1 tarea individual — se asigna en la Semana 8 y se entrega en la Semana 10.",
   },
   {
-    id: "proyecto",
-    nombre: "Proyecto final",
-    peso: "20%",
-    descripcion: "Entrega y defensa única en la Semana 12.",
+    id: "proyecto-entrega-0",
+    nombre: "Proyecto final — Entrega 0 (anteproyecto)",
+    peso: "0%",
+    descripcion:
+      "Propuesta sin nota, con veredicto del profesor — viernes 6 de noviembre, Semana 8.",
+  },
+  {
+    id: "proyecto-entrega-1",
+    nombre: "Proyecto final — Entrega 1 (avance)",
+    peso: "5%",
+    descripcion:
+      "Video, archivos fuente y primera versión del documento — domingo 22 de noviembre, Semana 10.",
+  },
+  {
+    id: "proyecto-entrega-final",
+    nombre: "Proyecto final — Entrega final y defensa",
+    peso: "15%",
+    descripcion:
+      "Documento final y defensa presencial — Semana 12, del 30 de noviembre al 4 de diciembre.",
   },
   {
     id: "parcial-1",
@@ -65,18 +80,73 @@ export const ejercicioEnClase = {
 };
 
 export const proyectoFinal = {
-  peso: "20% de la nota final",
-  modalidad: "Equipos, entorno de simulación",
-  herramientas: "CoppeliaSim Edu + Python (API remota ZeroMQ)",
-  publicacionDirectrices:
-    "Semana 6, inmediatamente después del Primer Parcial",
-  entrega: "Semana 12",
+  peso: "20% de la nota final, repartido en tres cortes",
+  modalidad: "Equipos · proyecto abierto, con tres rutas posibles",
+  publicacionDirectrices: "Semana 7",
   descripcion:
-    "Evaluación integradora en la que cada equipo concibe, desarrolla y defiende una aplicación robótica propia, desarrollada íntegramente en simulación con CoppeliaSim Edu y control desde Python. Consta de una sola entrega con su defensa correspondiente, sin fases parciales evaluadas.",
+    "Evaluación integradora en la que cada equipo concibe, desarrolla y defiende una aplicación robótica propia. El proyecto es abierto: cada equipo elige su ruta y propone su alcance, que el profesor ajusta tras revisar el anteproyecto. Los objetivos deben ser medibles.",
+  directrices: {
+    archivo: "/documentos/directrices-proyecto-final-fpten27.pdf",
+    paginas: 7,
+    peso: "169 KB",
+  },
+  cortes: [
+    {
+      id: "entrega-0",
+      nombre: "Entrega 0 — Anteproyecto",
+      peso: "0%",
+      fecha: "Viernes 6 de noviembre · Semana 8",
+      detalle:
+        "El equipo entrega su propuesta. No tiene nota. El fin de semana del 7 y 8 de noviembre el profesor devuelve un veredicto con recomendaciones: aprobado, subir alcance o bajar alcance.",
+    },
+    {
+      id: "entrega-1",
+      nombre: "Entrega 1 — Avance",
+      peso: "5%",
+      fecha: "Domingo 22 de noviembre · Semana 10",
+      detalle:
+        "Un video de 1 a 2 minutos, los archivos fuente y la primera versión del documento.",
+    },
+    {
+      id: "entrega-final",
+      nombre: "Entrega final y defensa",
+      peso: "15%",
+      fecha: "Del 30 de noviembre al 4 de diciembre · Semana 12",
+      detalle:
+        "Defensa presencial, en cualquier momento de esa semana —en horario de clase o fuera de él—, según lo que cada equipo acuerde con el profesor durante la Semana 11. De los 15 puntos, 10 son comunes al equipo y 5 individuales: preguntas individuales y una pregunta cruzada.",
+    },
+  ],
+  rutas: [
+    {
+      id: "ruta-a",
+      nombre: "Ruta A — Simulación en CoppeliaSim",
+      detalle:
+        "No hay una tarea fija: el equipo investiga la herramienta y propone su propia aplicación.",
+    },
+    {
+      id: "ruta-b",
+      nombre: "Ruta B — MATLAB / Simulink",
+      detalle:
+        "Uso obligatorio de al menos un toolbox de robótica de MathWorks.",
+    },
+    {
+      id: "ruta-c",
+      nombre: "Ruta C — Aplicación robótica física",
+      detalle:
+        "Los materiales corren por cuenta del equipo y el robot se muestra en vivo durante la defensa.",
+    },
+  ],
+  pisoComun: [
+    "Modelo cinemático del robot.",
+    "Un tema adicional del segundo corte, aplicado (Temas 9 a 12).",
+    "Verificación numérica entre la teoría y el resultado obtenido.",
+    "Aplicación industrial, con su fuente.",
+    "Declaración de lo que no es propio.",
+  ],
   coordinacionDefensa:
-    "Cada equipo coordina su horario de defensa con el profesor a partir de la Semana 11.",
+    "Cada equipo coordina su horario de defensa con el profesor durante la Semana 11.",
   advertencia:
-    "CoppeliaSim y su API remota no se cubren en clase ni en los laboratorios: su aprendizaje corre por cuenta de cada equipo y forma parte de lo que el proyecto evalúa. Hay seis semanas entre la publicación de las directrices y la entrega, y al ser una entrega única no existen puntos de control intermedios que sirvan de red. Conviene empezar en la Semana 6 y no dejar el aprendizaje de la herramienta ni la integración para los últimos días.",
+    "El anteproyecto no tiene nota, pero sí consecuencias: es donde el profesor ajusta el alcance. El equipo que no lo entregue pierde esa corrección y llega a la Entrega 1 con un proyecto que puede estar muy por encima o muy por debajo de lo pedido.",
 };
 
 export const parciales = [
@@ -158,9 +228,9 @@ export const kahoots = {
 
 export const fechasClave = [
   {
-    hito: "Publicación de directrices del Proyecto Final",
-    seccion1: "Miércoles 21 de octubre",
-    seccion2: "Jueves 22 de octubre",
+    hito: "Publicación de las directrices del Proyecto Final",
+    seccion1: "Lunes 26 de octubre",
+    seccion2: "Martes 27 de octubre",
   },
   {
     hito: "Asignación de la Tarea 2 (MATLAB)",
@@ -173,9 +243,19 @@ export const fechasClave = [
     seccion2: "Jueves 5 de noviembre",
   },
   {
+    hito: "Entrega 0 del Proyecto Final (anteproyecto, sin nota)",
+    seccion1: "Viernes 6 de noviembre",
+    seccion2: "Viernes 6 de noviembre",
+  },
+  {
     hito: "Entrega de la Tarea 2",
     seccion1: "Miércoles 18 de noviembre",
     seccion2: "Jueves 19 de noviembre",
+  },
+  {
+    hito: "Entrega 1 del Proyecto Final (avance, 5%)",
+    seccion1: "Domingo 22 de noviembre",
+    seccion2: "Domingo 22 de noviembre",
   },
   {
     hito: "Coordinación de horarios de defensa",
@@ -183,8 +263,8 @@ export const fechasClave = [
     seccion2: "Martes 24 de noviembre",
   },
   {
-    hito: "Entrega y defensa del Proyecto Final",
-    seccion1: "Lunes 30 de noviembre y miércoles 2 de diciembre",
-    seccion2: "Martes 1 y jueves 3 de diciembre",
+    hito: "Entrega final y defensa del Proyecto Final (15%)",
+    seccion1: "Del 30 de noviembre al 4 de diciembre",
+    seccion2: "Del 30 de noviembre al 4 de diciembre",
   },
 ];

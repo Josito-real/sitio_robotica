@@ -3,12 +3,44 @@
 export const silabo = {
   titulo: "Sílabo del curso",
   descripcion:
-    "El documento oficial de la materia: información general, objetivos, contenido temático, plan de evaluación, laboratorios, tareas, proyecto final y cronograma de ambas secciones.",
+    "El documento oficial de la materia: información general, objetivos, contenido temático, plan de evaluación, laboratorios, el ejercicio evaluado en clase, la tarea de MATLAB, el proyecto final y el cronograma de ambas secciones.",
   archivo: "/documentos/silabo-fpten27-2627-1.pdf",
-  paginas: 13,
-  peso: "250 KB",
+  paginas: 14,
+  peso: "264 KB",
   periodo: "Período 2627-1 · septiembre – diciembre 2026",
 };
+
+// Documentos de referencia del curso, aparte del sílabo. Son los mismos PDF
+// que el profesor reparte en clase.
+export const documentos = [
+  {
+    id: "plan-evaluacion",
+    titulo: "Plan de evaluación",
+    descripcion:
+      "Las diez actividades evaluadas del trimestre, con su semana, su porcentaje y si son grupales o individuales.",
+    archivo: "/documentos/plan-de-evaluacion-fpten27.pdf",
+    paginas: 1,
+    peso: "66 KB",
+  },
+  {
+    id: "cronograma-lunes-y-miercoles",
+    titulo: "Cronograma — lunes y miércoles",
+    descripcion:
+      "Las 12 semanas del trimestre para las secciones de lunes y miércoles, con sus evaluaciones y entregas.",
+    archivo: "/documentos/cronograma-lunes-y-miercoles-fpten27.pdf",
+    paginas: 1,
+    peso: "101 KB",
+  },
+  {
+    id: "cronograma-martes-y-jueves",
+    titulo: "Cronograma — martes y jueves",
+    descripcion:
+      "Las 12 semanas del trimestre para las secciones de martes y jueves, con sus evaluaciones y entregas.",
+    archivo: "/documentos/cronograma-martes-y-jueves-fpten27.pdf",
+    paginas: 1,
+    peso: "92 KB",
+  },
+];
 
 export const laminas = [
   {

@@ -55,8 +55,8 @@ const CLASES_SECCION_1 = [
   { semana: 5, fecha: "2026-10-12", tipo: "feriado", contenido: "Feriado nacional — no hay clase." },
   { semana: 5, fecha: "2026-10-14", tipo: "laboratorio", contenido: "Práctica 3: Control de actuadores (Arduino)." },
   { semana: 6, fecha: "2026-10-19", tipo: "parcial", contenido: "Primer parcial — Temas 1 al 7." },
-  { semana: 6, fecha: "2026-10-21", tipo: "teoria", contenido: "Tema 8: Cinemática directa. Matrices de transformación homogénea y notación Denavit-Hartenberg.", marcador: "Publicación de directrices del Proyecto Final" },
-  { semana: 7, fecha: "2026-10-26", tipo: "teoria", contenido: "Tema 8 (cont.): Cinemática inversa, métodos analíticos y numéricos. Matriz Jacobiana. Espacio de trabajo y restricciones." },
+  { semana: 6, fecha: "2026-10-21", tipo: "teoria", contenido: "Tema 8: Cinemática directa. Matrices de transformación homogénea y notación Denavit-Hartenberg." },
+  { semana: 7, fecha: "2026-10-26", tipo: "teoria", contenido: "Tema 8 (cont.): Cinemática inversa, métodos analíticos y numéricos. Matriz Jacobiana. Espacio de trabajo y restricciones.", marcador: "Publicación de las directrices del Proyecto Final" },
   { semana: 7, fecha: "2026-10-28", tipo: "teoria", contenido: "Tema 9: Generación de trayectorias (PTP, lineal, circular). Detección de colisiones y puntos de paso de seguridad." },
   { semana: 8, fecha: "2026-11-02", tipo: "teoria", contenido: "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Arquitectura ROS 2: nodos, tópicos y paradigma publicador/suscriptor. Demostración en MATLAB.", marcador: "Asignación de la Tarea 2" },
   { semana: 8, fecha: "2026-11-04", tipo: "evaluacion", contenido: "Ejercicio evaluado en clase: resolución de los parámetros Denavit-Hartenberg de un manipulador, en los mismos equipos de laboratorio, con verificación posterior usando las herramientas de MATLAB suministradas por el profesor.", marcador: "Ejercicio evaluado en clase (5%)" },
@@ -82,8 +82,8 @@ const CLASES_SECCION_2 = [
   { semana: 5, fecha: "2026-10-13", tipo: "laboratorio", contenido: "Práctica 2: Adquisición de datos con sensores (Arduino)." },
   { semana: 5, fecha: "2026-10-15", tipo: "laboratorio", contenido: "Práctica 3: Control de actuadores (Arduino)." },
   { semana: 6, fecha: "2026-10-20", tipo: "parcial", contenido: "Primer parcial — Temas 1 al 7." },
-  { semana: 6, fecha: "2026-10-22", tipo: "teoria", contenido: "Tema 8: Cinemática directa. Matrices de transformación homogénea y notación Denavit-Hartenberg.", marcador: "Publicación de directrices del Proyecto Final" },
-  { semana: 7, fecha: "2026-10-27", tipo: "teoria", contenido: "Tema 8 (cont.): Cinemática inversa, métodos analíticos y numéricos. Matriz Jacobiana. Espacio de trabajo y restricciones." },
+  { semana: 6, fecha: "2026-10-22", tipo: "teoria", contenido: "Tema 8: Cinemática directa. Matrices de transformación homogénea y notación Denavit-Hartenberg." },
+  { semana: 7, fecha: "2026-10-27", tipo: "teoria", contenido: "Tema 8 (cont.): Cinemática inversa, métodos analíticos y numéricos. Matriz Jacobiana. Espacio de trabajo y restricciones.", marcador: "Publicación de las directrices del Proyecto Final" },
   { semana: 7, fecha: "2026-10-29", tipo: "teoria", contenido: "Tema 9: Generación de trayectorias (PTP, lineal, circular). Detección de colisiones y puntos de paso de seguridad." },
   { semana: 8, fecha: "2026-11-03", tipo: "teoria", contenido: "Tema 10: Lenguajes de programación robótica (RAPID, KRL, Python). Arquitectura ROS 2: nodos, tópicos y paradigma publicador/suscriptor. Demostración en MATLAB.", marcador: "Asignación de la Tarea 2" },
   { semana: 8, fecha: "2026-11-05", tipo: "evaluacion", contenido: "Ejercicio evaluado en clase: resolución de los parámetros Denavit-Hartenberg de un manipulador, en los mismos equipos de laboratorio, con verificación posterior usando las herramientas de MATLAB suministradas por el profesor.", marcador: "Ejercicio evaluado en clase (5%)" },
@@ -117,6 +117,17 @@ export const secciones = [
   },
 ];
 
+// Hitos que no caen en un día de clase: se muestran a nivel de semana, con su
+// fecha real, en lugar de colgarlos de una sesión que ocurre otro día.
+export const hitosPorSemana = {
+  8: [
+    "Entrega 0 del Proyecto Final (anteproyecto, sin nota) — viernes 6 de noviembre",
+  ],
+  10: [
+    "Entrega 1 del Proyecto Final (avance, 5%) — domingo 22 de noviembre",
+  ],
+};
+
 export function getSemanas(seccionId) {
   const seccion = secciones.find((s) => s.id === seccionId) ?? secciones[0];
   const semanas = [];
@@ -124,7 +135,11 @@ export function getSemanas(seccionId) {
   for (const clase of seccion.clases) {
     let semana = semanas.find((s) => s.numero === clase.semana);
     if (!semana) {
-      semana = { numero: clase.semana, clases: [] };
+      semana = {
+        numero: clase.semana,
+        hitos: hitosPorSemana[clase.semana] ?? [],
+        clases: [],
+      };
       semanas.push(semana);
     }
     semana.clases.push({ ...clase, fechaLabel: formatFecha(clase.fecha) });

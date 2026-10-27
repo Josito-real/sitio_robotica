@@ -1,6 +1,6 @@
 import Container from "@/components/layout/Container";
 import DocumentoCard from "@/components/materiales/DocumentoCard";
-import { silabo, laminas } from "@/data/materiales";
+import { silabo, documentos, laminas } from "@/data/materiales";
 
 export const metadata = {
   title: "Material de clase — Robótica UNIMET",
@@ -32,6 +32,24 @@ export default function MaterialPage() {
               peso={silabo.peso}
               destacado
             />
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-2xl font-bold">
+            Cronogramas y plan de evaluación
+          </h2>
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {documentos.map((documento) => (
+              <DocumentoCard
+                key={documento.id}
+                titulo={documento.titulo}
+                descripcion={documento.descripcion}
+                archivo={documento.archivo}
+                paginas={documento.paginas}
+                peso={documento.peso}
+              />
+            ))}
           </div>
         </section>
 

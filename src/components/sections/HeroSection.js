@@ -24,11 +24,12 @@ export default function HeroSection() {
           <p>
             Vas a trabajar en dos frentes. Por un lado, los robots del
             laboratorio: Arduino, Dobot Magician y PiCar-X. Por otro, la
-            simulación con CoppeliaSim Edu controlada desde Python, más MATLAB
-            para el cálculo cinemático y para implementar arquitecturas bajo el
-            paradigma ROS 2. El curso cierra con un proyecto integrador en el
-            que cada equipo concibe, implementa y defiende una aplicación
-            robótica propia.
+            simulación y el cálculo: MATLAB para la cinemática y para
+            implementar arquitecturas bajo el paradigma ROS 2, y CoppeliaSim
+            Edu controlado desde Python. El curso cierra con un proyecto
+            integrador en el que cada equipo concibe, implementa y defiende una
+            aplicación robótica propia: en simulación con CoppeliaSim, en
+            MATLAB/Simulink con toolboxes de robótica o como robot físico.
           </p>
           <p>
             La nota se reparte entre 6 prácticas de laboratorio (30%), un

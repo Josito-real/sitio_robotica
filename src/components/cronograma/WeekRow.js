@@ -39,6 +39,18 @@ export default function WeekRow({ semana }) {
   return (
     <li className="rounded-xl border border-zinc-200 p-5 dark:border-zinc-800">
       <h3 className="mb-3 font-semibold">Semana {semana.numero}</h3>
+      {semana.hitos?.length > 0 && (
+        <ul className="mb-3 space-y-1">
+          {semana.hitos.map((hito) => (
+            <li
+              key={hito}
+              className="text-sm font-medium text-green-700 dark:text-green-400"
+            >
+              ▸ {hito}
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="flex flex-col gap-3 sm:flex-row">
         {semana.clases.map((clase) => (
           <ClaseBlock key={clase.fecha} clase={clase} />
