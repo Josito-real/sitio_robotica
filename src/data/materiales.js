@@ -214,6 +214,24 @@ export const laminas = [
   },
 ];
 
+// Clases grabadas. Se publican cuando una sección no pudo tener la sesión
+// presencial, para que pueda recuperarla.
+export const grabaciones = [
+  {
+    id: "tema-10-grabacion",
+    tema: 10,
+    titulo: "Grabación de la clase",
+    enlace:
+      "https://drive.google.com/file/d/1XCh4bzEi-PHrVvxvmTr_tBy0yruvGtje/view?usp=sharing",
+    motivo:
+      "Las secciones de lunes y miércoles no tuvieron esta clase presencial. Con esta grabación pueden recuperarla.",
+  },
+];
+
+export function grabacionDelTema(numeroDeTema) {
+  return grabaciones.find((grabacion) => grabacion.tema === numeroDeTema);
+}
+
 // Material de preparación de un tema: archivos que no son solo láminas
 // (guía más paquete de trabajo) y los pasos para usarlos.
 export const recursosDeTema = [
