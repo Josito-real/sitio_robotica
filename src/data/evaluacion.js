@@ -194,6 +194,22 @@ export const parciales = [
       },
       { seccion: "Sección 2 — martes y jueves", fecha: "Jueves 26 de noviembre" },
     ],
+    modelos: [
+      {
+        id: "parcial-2-modelo-a",
+        nombre: "Modelo de práctica A",
+        archivo: "/documentos/parcial-2-modelo-a.pdf",
+        paginas: 7,
+        peso: "305 KB",
+      },
+      {
+        id: "parcial-2-modelo-b",
+        nombre: "Modelo de práctica B",
+        archivo: "/documentos/parcial-2-modelo-b.pdf",
+        paginas: 7,
+        peso: "305 KB",
+      },
+    ],
   },
 ];
 

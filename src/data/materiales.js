@@ -207,10 +207,10 @@ export const laminas = [
   {
     id: "tema-12",
     tema: 12,
-    titulo: "Redes neuronales",
-    estado: "proximamente",
-    origen: "7_1.-Redes neuronales.pdf",
-    destino: "/laminas/12-redes-neuronales.pdf",
+    titulo: "Sistemas de robótica autónoma",
+    archivo: "/laminas/12-sistemas-de-robotica-autonoma.pdf",
+    paginas: 15,
+    peso: "15,1 MB",
   },
 ];
 
