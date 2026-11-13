@@ -264,6 +264,38 @@ export const recursosDeTema = [
       "Deriva la tabla DH del modelo de práctica en tabla_dh.m, verifícala con la sección 3 y compárala después con tabla_dh_solucion.m.",
     ],
   },
+  {
+    id: "tema-10-guia-ros2",
+    tema: 10,
+    titulo: "Guía de autoaprendizaje — lenguajes de robótica y ROS 2",
+    descripcion:
+      "Para estudiar y reproducir la clase por tu cuenta: el mismo programa escrito en RAPID, KRL y Python, la orientación con ángulos de Euler y cuaterniones, la arquitectura de ROS 2, la demostración con turtlesim, figuras con control en lazo cerrado, dos robots controlados por un mismo nodo y un servicio programado por ti.",
+    archivos: [
+      {
+        id: "guia",
+        etiqueta: "Guía (PDF)",
+        archivo: "/materiales/tema-10/guia-practica-ros2.pdf",
+      },
+    ],
+    detalleArchivos: "23 páginas · 433 KB.",
+  },
+  {
+    id: "tema-11-guia-vision",
+    tema: 11,
+    titulo: "Guía de autoaprendizaje — visión artificial con OpenCV",
+    descripcion:
+      "Acompaña los siete scripts que se ejecutaron en clase para que los corras, cambies sus parámetros y compruebes cada concepto por ti mismo: la imagen como matriz de números, el espacio HSV, los filtros, la detección de bordes, la segmentación y la medición de distancia con una cámara. Cada sección trae experimentos cortos y, al final, ejercicios de repaso con sus respuestas.",
+    archivos: [
+      {
+        id: "guia",
+        etiqueta: "Guía (PDF)",
+        archivo: "/materiales/tema-11/guia-practica-vision-artificial.pdf",
+      },
+    ],
+    detalleArchivos: "19 páginas · 394 KB.",
+    requisitos:
+      "Python 3, una cámara web y las librerías OpenCV y NumPy (pip install opencv-python numpy).",
+  },
 ];
 
 export function recursosDelTema(numeroDeTema) {

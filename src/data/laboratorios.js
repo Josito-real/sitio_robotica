@@ -28,21 +28,21 @@ export const practicas = [
     nombre: "Programación por bloques de robot móvil",
     equipo: "PiCar-X (Blockly)",
     semana: "Semana 10",
-    guia: null,
+    guia: "/guias/practica-4-picar-x-ezblock.pdf",
   },
   {
     numero: 5,
     nombre: "Programación en Python desde la Raspberry Pi",
     equipo: "PiCar-X",
     semana: "Semana 10",
-    guia: null,
+    guia: "/guias/practica-5-picar-x-python.pdf",
   },
   {
     numero: 6,
     nombre: "Pick and place y generación de trayectorias",
     equipo: "Dobot Magician",
     semana: "Semana 11",
-    guia: null,
+    guia: "/guias/practica-6-dobot-magician.pdf",
   },
 ];
 
